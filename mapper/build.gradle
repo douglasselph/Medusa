@@ -1,0 +1,5 @@
+
+
+tasks.eclipse.doLast {
+    delete ".project"
+}

@@ -1,0 +1,150 @@
+## Java
+
+*.class
+*.war
+*.ear
+hs_err_pid*
+
+## Robovm
+mapper/ios/robovm-build/
+
+## GWT
+mapper/html/war/
+mapper/html/gwt-unitCache/
+mapper.apt_generated/
+mapper.gwt/
+gwt-unitCache/
+mapper/www-test/
+mapper/.gwt-tmp/
+
+## Android Studio and Intellij and Android in general
+mapper/android/libs/armeabi/
+mapper/android/libs/armeabi-v7a/
+mapper/android/libs/arm64-v8a/
+mapper/android/libs/x86/
+mapper/android/libs/x86_64/
+mapper/android/gen/
+mapper.idea/
+.idea/
+*.ipr
+*.iws
+*.iml
+*#
+mapper/android/out/
+com_crashlytics_export_strings.xml
+
+## Eclipse
+
+.classpath
+.project
+.metadata/
+mapper/android/bin/
+mapper/core/bin/
+mapper/desktop/bin/
+mapper/html/bin/
+mapper/ios/bin/
+mapper/ios-moe/bin/
+*.tmp
+*.bak
+*.swp
+*~.nib
+mapper/.settings/
+.loadpath
+.externalToolBuilders/
+*.launch
+*#
+
+## NetBeans
+
+mapper/nbproject/private/
+mapper/android/nbproject/private/
+mapper/core/nbproject/private/
+mapper/desktop/nbproject/private/
+mapper/html/nbproject/private/
+mapper/ios/nbproject/private/
+mapper/ios-moe/nbproject/private/
+
+build/
+mapper/build/
+mapper/android/build/
+mapper/core/build/
+mapper/desktop/build/
+mapper/html/build/
+mapper/ios/build/
+mapper/ios-moe/build/
+
+mapper/nbbuild/
+mapper/android/nbbuild/
+mapper/core/nbbuild/
+mapper/desktop/nbbuild/
+mapper/html/nbbuild/
+mapper/ios/nbbuild/
+mapper/ios-moe/nbbuild/
+
+mapper/dist/
+mapper/android/dist/
+mapper/core/dist/
+mapper/desktop/dist/
+mapper/html/dist/
+mapper/ios/dist/
+mapper/ios-moe/dist/
+
+mapper/nbdist/
+mapper/android/nbdist/
+mapper/core/nbdist/
+mapper/desktop/nbdist/
+mapper/html/nbdist/
+mapper/ios/nbdist/
+mapper/ios-moe/nbdist/
+
+nbactions.xml
+nb-configuration.xml
+
+## Gradle
+
+mapper/local.properties
+mapper/.gradle/
+gradle-app.setting
+mapper/build/
+mapper/android/build/
+mapper/core/build/
+mapper/desktop/build/
+mapper/html/build/
+mapper/ios/build/
+mapper/ios-moe/build/
+
+## OS Specific
+.DS_Store
+Thumbs.db
+
+# Android built artifacts
+*.apk
+*.ap_
+*.dex
+
+# Java build artifacts class files
+*.class
+
+# other generated files
+bin/
+gen/
+build/
+
+# local configuration file (for Android sdk path, etc)
+local.properties
+
+# OSX files
+.DS_Store
+
+# Eclipse project files
+.classpath
+.project
+
+# Android Studio
+*.iml
+.idea
+.gradle
+
+
+#NDK
+obj/

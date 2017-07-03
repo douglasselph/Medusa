@@ -1,0 +1,9 @@
+include ':ccand'
+include 'mapper:desktop'
+include 'mapper:android'
+include 'mapper:core'
+include 'mapper:ios'
+include 'mapper:html'
+
+include 'support:common'
+//include 'support:supportand'
