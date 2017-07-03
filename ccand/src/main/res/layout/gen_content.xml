@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_centerHorizontal="true"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.dugsolutions.ccand.act.GenActivity"
+    tools:showIn="@layout/gen_activity">
+
+    <TextView
+        android:id="@+id/frame_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/FrameTitle"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
+
+    <LinearLayout
+        android:id="@+id/buttons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/prev"
+            style="@style/FrameButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:text="@string/btn_prev"
+            android:textAllCaps="false"/>
+
+        <Button
+            android:id="@+id/next"
+            style="@style/FrameButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="@string/btn_next"
+            android:textAllCaps="false"/>
+    </LinearLayout>
+
+    <include layout="@layout/frame_chars"/>
+
+</RelativeLayout>
