@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <spell name="Alarm">
+        <p>Casting Alarm on a location such as a room
+            or small clearing creates a temporary psychic
+            bond between the area and the caster. If the
+            area is accessed by a living creature with a
+            SIZ greater than 1, the caster is automatically
+            made aware that something has transgressed
+            no matter how great the distance. The Alarm
+            is usually a distinct tingling sensation or mental twinge which will awaken the caster.
+            Alarm can also be used on an individual object, triggering when touched or moved.
+        </p>
+        <p>The spell does not determine who or what
+            has crossed the alarmed threshold and neither does it prevent ingress. It lasts until
+            triggered, but the Magic Point used to cast it does
+            not recover until the spell is dismissed or concludes naturally. Once activated Alarm
+            must be cast again.
+        </p>
+    </spell>
+
+</resources>

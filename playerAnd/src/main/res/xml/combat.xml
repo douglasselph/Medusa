@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <combatstyle
+        name="Frydman"
+        weapons="longsword"></combatstyle>
+    <combatstyle name="Berserker"></combatstyle>
+    <combatstyle name="Horse Eater"></combatstyle>
+    <combatstyle name="Seaborne Reiver"></combatstyle>
+    <combatstyle name="Weapon Thegn"></combatstyle>
+    <combatstyle name="Wolf Hunter"></combatstyle>
+    <combatstyle name="Citizen Legionary"></combatstyle>
+    <combatstyle name="Phalangite"></combatstyle>
+    <combatstyle name="Levied Archer"></combatstyle>
+    <combatstyle name="Light Skirmisher"></combatstyle>
+    <combatstyle name="Street Thug"></combatstyle>
+    <combatstyle name="Town Miltia"></combatstyle>
+    <combatstyle name="Cavalry"></combatstyle>
+    <combatstyle name="Feathered Death Flinger"></combatstyle>
+    <combatstyle name="Horse Lord"></combatstyle>
+    <combatstyle name="Whale Hunter"></combatstyle>
+    <combatstyle name="Wheeled Warrior"></combatstyle>
+    <combatstyle name="Wolf runner"></combatstyle>
+    <combatstyle name="Flint Death Dealer"></combatstyle>
+    <combatstyle name="Ghost Warior"></combatstyle>
+    <combatstyle name="Head Hunter"></combatstyle>
+
+    <combat weapontype="any">
+        <guard name="pell">No skill guard stance. Just standing there like a practice pell, holding
+            the weapon.
+        </guard>
+        <strike
+            name="swing"
+            engage="true">Standard swing. No training required.
+        </strike>
+    </combat>
+
+    <combat>
+        <strike
+            name="jab"
+            engage="true"
+            special="impale">Standard thrust attack. No special training required.
+        </strike>
+
+        <strike name="burst forth">Fierce rush forward not yet commiting to stab or slice</strike>
+        <strike
+            name="press"
+            skill="40">Advance with weapon in front of you, threatening. Closing range, without
+            committing to an attack
+        </strike>
+        <engaged name="grab">Close range, your weapon ignored. Try to grab hands.</engaged>
+        <engaged name="push">Close range, your weapon ignored. Try to push off balance</engaged>
+        <engaged
+            name="trip"
+            skill="40">Close range, your weapon ignored. Try to trip using legs.
+        </engaged>
+        <engaged
+            name="elbow"
+            skill="40">Close range, your weapon ignored. Try to elbow in the face.
+        </engaged>
+        <engaged
+            name="pommel"
+            skill="40">Close range, using pommel of weapon as a strike.
+        </engaged>
+    </combat>
+
+    <combat
+        effects="cut,impale"
+        weapontype="sword">
+        <style name="frydman">
+            <guard name="plow">Standard guard allowing for the jab.</guard>
+            <guard name="woman">
+                <strike
+                    name="swing"
+                    damage="+2">Power swing
+                </strike>
+            </guard>
+            <strike
+                name="snake"
+                bonus="5"
+                enhances="jab">Lunge: a quick powerful thrust
+            </strike>
+            <strike
+                bonus="5"
+                enhances="press" />
+            <strike
+                name="stir"
+                skill="40"
+                special="confuse">Twirl motion to confuse opponent
+            </strike>
+            <strike
+                name="intercept"
+                skill="50"
+                special="response:jab,aim=wrist">Attack opponents wrist as they stab toward you.
+            </strike>
+        </style>
+    </combat>
+
+    <combat
+        effects="impale"
+        weapontype="spear"></combat>
+
+    <combat
+        effects="cut,sunder"
+        weapontype="axe"></combat>
+
+    <combat
+        effects="bash,stun"
+        weapontype="mace"></combat>
+
+    <combat
+        effects="bash,stun"
+        weapontype="hammer"></combat>
+
+    <combat weapontype="dagger"></combat>
+
+    <combat weapons="sword,buckler">
+        <style name="Phalangite">
+            <gaurd name="roof"></gaurd>
+            <strike
+                defense="+10"
+                enhances="jab"
+                offense="+5"></strike>
+        </style>
+    </combat>
+
+    <combat weapons="claws">
+        <style name="Alber"></style>
+        <strike
+            enhances="jab"
+            special="leadsto:grapple">Attacking to avoid weapon to gain close quarters.
+        </strike>
+    </combat>
+
+    <combat weapontype="bow"></combat>
+
+</resources>

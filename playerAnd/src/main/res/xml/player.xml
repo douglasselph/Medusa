@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <creature name="humanoid">
+        <locations base="(CON+SIZ)/5">
+            <location
+                name="right leg"
+                hp="base+0.5"
+                roll="3" />
+            <location
+                name="left leg"
+                hp="base+0.5"
+                roll="6" />
+            <location
+                name="abdomen"
+                hp="base+1.5"
+                roll="9" />
+            <location
+                name="chest"
+                hp="base+2.5"
+                roll="12" />
+            <location
+                name="right arm"
+                hp="base"
+                roll="15" />
+            <location
+                name="left arm"
+                hp="base"
+                roll="18" />
+            <location
+                name="head"
+                hp="base+0.5"
+                roll="20" />
+        </locations>
+    </creature>
+
+    <player
+        name="Baniyan"
+        cha="3d6"
+        con="2d6+12"
+        dex="2d6+1"
+        help="Mountain Dwarf"
+        int="2d6+6"
+        ken="2d6+6"
+        silver="4d6*75"
+        siz="1d6+6"
+        str="4d6">
+    </player>
+    <player
+        name="Aronian"
+        cha="3d6"
+        con="3d6"
+        dex="3d6+6"
+        help="Island Forest Elf"
+        int="3d6+6"
+        ken="2d6+6"
+        silver="4d6*50"
+        siz="2d6+3"
+        str="2d6+3">
+    </player>
+    <player
+        name="Achielian"
+        cha="3d6"
+        con="3d6+3"
+        dex="3d6+3"
+        help="Cloud Elf"
+        int="3d6+6"
+        ken="2d6+6"
+        silver="4d6*75"
+        siz="2d6+3"
+        str="2d6+3">
+    </player>
+    <player
+        name="Agorian"
+        cha="3d6"
+        con="3d6"
+        dex="3d6+6"
+        help="Deep Forest Elf"
+        int="3d6+3"
+        ken="2d6+6"
+        silver="4d6*40"
+        siz="2d6+3"
+        str="2d6+6">
+    </player>
+    <player
+        name="Zeparian"
+        cha="3d6+2"
+        con="3d6+3"
+        dex="3d6+3"
+        help="Lake Human"
+        int="3d6+3"
+        ken="3d6+3"
+        silver="4d6*25"
+        siz="2d6+3"
+        str="3d6">
+    </player>
+    <player
+        name="Finarian"
+        cha="3d6"
+        con="3d6+3"
+        dex="3d6+2"
+        help="Fire Horse Lord, Plains"
+        int="3d6"
+        ken="2d6+6"
+        silver="4d6*75"
+        siz="2d6+6"
+        str="3d6+3">
+    </player>
+    <player
+        name="Zuzoan"
+        cha="2d6+6"
+        con="3d6+6"
+        dex="3d6+2"
+        help="Medusa"
+        int="3d6+3"
+        ken="2d6+6"
+        silver="4d6*100"
+        siz="2d6+6"
+        str="3d6+2">
+    </player>
+    <player
+        name="Vinosean"
+        cha="3d6"
+        con="3d6+6"
+        dex="3d6+2"
+        help="Eastern Kingdom"
+        int="2d6+6"
+        ken="3d6+2"
+        silver="4d6*85"
+        siz="2d6+6"
+        str="3d6+2">
+    </player>
+    <player
+        name="Pruman"
+        cha="3d6"
+        con="2d6+9"
+        dex="2d6+9"
+        help="Bird, Halfling"
+        int="2d6+6"
+        ken="3d6"
+        silver="4d6*65"
+        siz="1d6+6"
+        str="2d6+3">
+    </player>
+    <player
+        name="Relaphian"
+        cha="3d6+1"
+        con="3d6+3"
+        dex="3d6+3"
+        help="Aquatic Lords"
+        int="3d6+3"
+        ken="2d6+6"
+        silver="4d6*80"
+        siz="2d6+2"
+        str="3d6+3">
+    </player>
+
+</resources>

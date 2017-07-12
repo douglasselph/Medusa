@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <culture
+        name="Baniyan"
+        careers="hunter,merchant,priest,warrior"
+        godken="Baniyah"
+        help="Mountain Dwarf"
+        skills="throwing,brawn,endurance,unarmed"></culture>
+    <culture
+        name="Aronian"
+        careers="beast handler,hunter,physician,priest,warrior"
+        godken="Aros"
+        help="Forest Elf"
+        skills="throwing,first aid,perception,lore(animal),conceal,locate"></culture>
+    <culture
+        name="Arendian"
+        careers="physician,priest,warrior"
+        help="Island Elf"
+        skills="sailor,first aid,perception,lore(animal)"></culture>
+    <culture
+        name="Achielian"
+        careers="agent,entertainer,merchant,priest,warrior"
+        godken="Achiel"
+        help="Cloud Elf"
+        skills="climbing,jumping,perception,sing"></culture>
+    <culture
+        name="Zeparian"
+        careers="agent,beast handler,hunter,physician,priest,warrior"
+        godken="Zepar"
+        help="Lake Spirit"
+        skills="first aid,lore(animal),conceal,evade,locate,sing,stealth"></culture>
+    <culture
+        name="Finarian"
+        careers="beast handler,hunter,physician,priest,thief,warrior"
+        godken="Finare"
+        help="Plain Horse Fire Barbarian"
+        skills="running,brawn,ride,dance,endurance,sing,unarmed"></culture>
+    <culture
+        name="Zuzoan"
+        careers="agent"
+        godken="Zuzou"
+        profs="seduction"
+        help="Medusa"
+        skills="perception,deceit,evade,influence,insight,willpower"></culture>
+    <culture
+        name="Pruman"
+        careers="entertainer,physician,priest,thief,warrior"
+        godken="Pruma"
+        help="Bird Recluse Hobbit"
+        skills="first aid,lore(animal),conceal,evade,sing,stealth"></culture>
+    <culture
+        name="Rielaphian"
+        careers="entertainer,merchant,sailor,priest,warrior"
+        godken="Rielaph"
+        help="Aquatic Beauty"
+        skills="atheletics,bating,swimming,dance,sing,perception"></culture>
+    <culture
+        name="Harlone"
+        careers="agent,official,sailor,thier,warrior"
+        kingdom="Vinosean"
+        help="Military Human"
+        skills="first aid,unarmed,brawn"></culture>
+    <culture
+        name="Nevrithell"
+        careers="agent,official,priest,sailor"
+        kingdom="Vinosean"
+        help="Magic Human"
+        skills="willpower"></culture>
+    <culture
+        name="Bariande"
+        careers="merchant,sailor,thief,warrior"
+        kingdom="Vinosean"
+        help="Ship Human"
+        skills="boating"></culture>
+    <culture
+        name="Erialond"
+        careers="beast handler,hunter,thief"
+        kingdom="Vinosean"
+        help="Farm Human"
+        skills="locale,insight"></culture>
+    <culture
+        name="Gamor"
+        careers="agent,entertainer,merchant,official,priest,sailor"
+        kingdom="Vinosean"
+        help="Diplomacy Human"
+        skills="dance,sing,influence,willpower"></culture>
+    <culture
+        name="Gothriande"
+        careers="agent,hunter,official,physician,priest,sailor,warrior"
+        kingdom="Vinosean"
+        help="Knowledge"
+        skills="locale,perception"></culture>
+
+</resources>

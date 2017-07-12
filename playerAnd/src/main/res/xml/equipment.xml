@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <armor
+        name="Fur,Hide"
+        ap="1"
+        cost="20"
+        enc="2"
+        penalty="3"
+        type="cured" />
+    <armor
+        name="Aketon,Gambeson"
+        ap="2"
+        cost="80"
+        enc="1"
+        penalty="2"
+        type="padded" />
+    <armor
+        name="Linothorax,Bezainted"
+        ap="3"
+        cost="180"
+        enc="2"
+        penalty="3"
+        type="laminated" />
+    <armor
+        name="Brigandine,Lamellar"
+        ap="4"
+        cost="320"
+        enc="3"
+        penalty="5"
+        type="scaled" />
+    <armor
+        name="Hoplite Plate"
+        ap="5"
+        cost="500"
+        enc="4"
+        penalty="6"
+        type="half plate" />
+    <armor
+        name="Mail Hauberk,Laminar"
+        ap="6"
+        cost="900"
+        enc="5"
+        penalty="7"
+        type="mail" />
+    <armor
+        name="Splited Chainmail"
+        ap="7"
+        cost="1400"
+        enc="6"
+        penalty="9"
+        type="plated mail" />
+    <armor
+        name="Gothic Plate"
+        ap="8"
+        cost="2400"
+        enc="7"
+        penalty="10"
+        type="articulated plate" />
+    <weapon
+        name="Battleaxe"
+        ap="4"
+        cost="100"
+        damage="1d8+1"
+        effects="bleed,sunder"
+        enc="1"
+        hp="8"
+        reach="m"
+        size="m"
+        type="twohanded" />
+    <weapon
+        name="Broadsword"
+        ap="6"
+        cost="175"
+        damage="1d8"
+        effects="bleed,impale"
+        enc="2"
+        hp="10"
+        reach="m"
+        size="m" />
+    <weapon
+        name="Chain"
+        ap="8"
+        cost="10"
+        damage="1d4"
+        effects="entangle"
+        enc="1"
+        hp="6"
+        reach="m"
+        size="m"
+        traits="flexible" />
+    <weapon
+        name="Dagger"
+        ap="6"
+        cost="30"
+        damage="1d4+1"
+        effects="bleed,impale"
+        enc="0"
+        hp="8"
+        reach="s"
+        size="s"
+        traits="thrown" />
+    <weapn
+        name="Knife"
+        ap="5"
+        damage="1d3"
+        effects="bleed,impale"
+        hp="4"
+        reach="s"
+        size="s" />
+    <weapon
+        name="Long Bow"
+        ap="4"
+        cost="200"
+        damage="1d8"
+        effects="impale"
+        enc="1"
+        force="h"
+        hp="7"
+        impalesize="s"
+        load="2"
+        mod="true"
+        rnage="15/125/250"
+        type="ranged" />
+    <weapon
+        name="Longsword"
+        ap="6"
+        cost="250"
+        damage="1d8"
+        effects="bleed,impale"
+        enc="2"
+        hp="12"
+        reach="l"
+        size="m" />
+    <weapon
+        name="Mace"
+        ap="6"
+        damage="1d8"
+        effects="bash,stun location"
+        enc="1"
+        hp="6"
+        reach="s"
+        size="m" />
+    <shield
+        name="Buckler"
+        ap="6"
+        cost="50"
+        damage="1d3"
+        enc="1"
+        hp="9"
+        reach="s"
+        size="m"
+        traints="ranged parry,passive blocks 2" />
+    <item
+        name="Boots"
+        cost="25/50/100"
+        type="garment" />
+    <item
+        name="Cap,Hat"
+        cost="3/6/18"
+        type="garment" />
+    <item
+        name="Tunic,Dress"
+        cost="15/30/75"
+        type="garment" />
+    <item
+        name="meal"
+        cost="1/3/8"
+        type="food (tavern)" />
+    <item
+        name="ale,beer"
+        cost="1/1.5/3"
+        type="food" />
+    <item
+        name="Trail Rations"
+        cost="7/9/12"
+        type="food" />
+    <item
+        name="cow"
+        cost="100/200/600"
+        type="livestock" />
+    <item
+        name="pig"
+        cost="25/50/150"
+        type="livestock" />
+    <item
+        name="bedroll"
+        cost="1"
+        enc="1"
+        type="tool" />
+    <item
+        name="First aid kit"
+        cost="25"
+        count="10"
+        type="tool" />
+
+</resources>

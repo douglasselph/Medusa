@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <skill
+        name="Athletics"
+        chars="STR+DEX" />
+    <skill
+        name="Climbing"
+        parent="Athletics">
+        <p>With the right surface (hand and foot-holds), the right equipment (ladders, ropes,
+            pitons) and enough time, characters can climb any surface without the need for a
+            roll. Under normal circumstances, use the following guidelines:
+        </p>
+        <ul>
+            <li>Climbing a rough or rugged surface (branching trees, scaffolds, piles of rubble
+                and so on): Half the Armour Penalty (rounded up) is subtracted from the
+                character’s base Movement (6 metres per Combat Action for human Adventurers). If
+                the result is zero or less, they are too encumbered by armour to climb.
+            </li>
+            <li>Climbing a steep surface (pitched roofs, steep hills, and so on): The Armour
+                Penalty is subtracted directly from the base Movement. If the result is zero or
+                less, they are too burdened by armour to climb.
+            </li>
+            <li>Climbing a sheer surface (walls, cliff faces, and so on): Double the Armour
+                Penalty is subtracted from the base Movement. As with previous situations,
+                if the result is zero or less, the character cannot climb.
+            </li>
+            <li>Tests should be made for treacherous surfaces (such as sheer cliffs or wet
+                surfaces) and if a character is distracted, or even attacked, during his ascent
+                or descent.
+            </li>
+        </ul>
+        <p>A critical success permits the climber to scale the surface extremely quickly or
+            avoid any hidden danger involved with the attempt.
+        </p>
+        <p>A failure merely indicates that the climb was aborted.</p>
+        <p>A fumbled Climbing roll results in a fall; furthermore the character cannot attempt
+            an Acrobatics roll (if he has that skill) to reduce falling damage.
+        </p>
+    </skill>
+    <skill
+        name="Jumping"
+        parent="Athletics">
+        <p>A successful Athletics roll allows one to
+            jump up to twice one’s own height horizontally or up to half one’s own height vertically
+            (if the character has at least a five metres runup available). If the jumper is jumping
+            from a standing position then these distances are halved. Any jump of over half a
+            character’s maximum distance results in him falling prone on landing.
+        </p>
+        <ul>
+            <li>If wearing armour reduce the jump distance in metres by half the Armour Penalty to a
+                minimum of one normal step.
+            </li>
+            <li>For every full 20% a character has in Athletics, he can add an extra metre to a
+                horizontal jump, or 20cm to a vertical
+                one, if he has space to perform a run up.
+            </li>
+        </ul>
+        <p>On a critical success the character adds a further metre to his total distance, and
+            remains upright on landing.
+        </p>
+        <p>A fumbled roll indicates the character has landed awkwardly. He must immediately
+            make an Endurance roll. If the Endurance roll is a success 1 point of damage is
+            sustained to
+            one leg. If the Endurance test fails, then 1d4 points of damage is inflicted instead.
+        </p>
+    </skill>
+    <skill
+        name="Running"
+        parent="Athletics">A higher Athletics skill allows a character
+        to run at a higher speed over short or long
+        distances.
+        <ul>
+            <li>For every full 25% a character has in
+                Athletics, he can add an extra metre
+                to his base Movement when sprinting,
+                or half that when running over longer
+                distances. In certain situations where
+                space may be limited, such as Charging
+                within a melee, the character can decide
+                not to apply this bonus and remain at
+                his base racial or species movement.
+            </li>
+        </ul>
+        <p>On a critical success the character adds a further metre to his Movement rate.
+        </p>
+        <p>
+            A failure causes the runner to increase a level of fatigue.
+        </p>
+        <p>
+            A fumbled roll indicates the character has
+            pulled a muscle or torn a ligament and must
+            cease running. He must immediately make an
+            Endurance roll. If the Endurance roll is a success 1 point of damage is sustained to one
+            leg.
+            If the Endurance test fails, then 1d4 points of
+            damage is inflicted instead.
+        </p>
+    </skill>
+    <skill
+        name="Throwing"
+        parent="Athletics">Athletics can also be used for hurling
+        large, unwieldy objects over distance or tossing smaller items with accuracy. Throwing
+        is restricted for sports or improvised missile
+        weapons - everything from small stones to
+        bar stools. Weapons which are thrown using
+        a specific technique to ensure it strikes point
+        or blade first (rather than just achieving dis-
+        tance), such as javelins, axes or knives, use
+        their Combat Style instead.
+        <ul>
+            <li>A thrown object has a maximum range
+                of one metre for every point the character’s STR exceeds the object’s SIZ.
+            </li>
+        </ul>
+    </skill>
+    <skill
+        name="Boating"
+        chars="STR+CON">
+        <p>The Boating skill covers the operation
+            of small floating craft on rivers, lakes and
+            close inshore. Appropriate vessels are generally boats, canoes or rafts which travel
+            short distances and are unsuited to the rigours of
+            the open sea. Most are propelled using oars,
+            paddles, punts or simple sails; or can even be
+            towed by animals. Ships with large crews or
+            designed for long, overseas journeys are covered under the Seamanship professional
+            skill.
+        </p>
+        <p>
+            The skill measures a character’s compe-
+            tence in propelling a boat in the right direction and dealing with adverse conditions.
+            With no distractions and optimal conditions
+            a Boating roll is unnecessary, although lesser
+            skilled characters may take longer to get
+            where they need to as they manage the boat’s
+            handling.
+        </p>
+        <p>
+            A critical Boating success increases the
+            vessel’s Movement rate by one tenth.
+        </p>
+        <p>
+            A failed Boating roll implies the boat’s
+            movement rate is halved or it failed to reach its intended destination; for instance
+            navigating to an isolated rock positioned above a waterfall.
+        </p>
+        <p>A fumbled Boating roll indicates losing an
+            oar, taking on water or some other serious
+            inconvenience. If the weather is bad or the
+            water violent, then a fumble causes the boat
+            to capsize.
+        </p>
+    </skill>
+    <skill
+        name="Brawn"
+        chars="STR+SIZ">Brawn is the efficient application of technique when applying raw physical
+        force. The
+        skill covers acts of applied might, including
+        lifting, breaking and contests of strength.
+    </skill>
+    <skill
+        name="Lifting"
+        parent="Brawn">
+        <p>A character can lift and carry up to their
+            STR in SIZ up off the ground, or drag double
+            this amount, without needing a Brawn roll.
+            As a mass equivalent, 1 point of SIZ equals,
+            roughly, 5 kilograms. For every full 10% he
+            possesses in the skill the character may add
+            an extra point of SIZ or 5kg to his total.
+        </p>
+        <p>For SIZ or mass above this the character
+            needs to succeed in a Brawn roll. The maximum weight a character can briefly lift is
+            equal to twice their STR, plus whatever bonus
+            they gain from their skill.
+        </p>
+        <p>
+            Failing the Brawn roll may result in injury;
+            the character must make a successful Endurance roll or suffer 1d3 points of damage to a
+            random location below the head.
+        </p>
+        <p>
+            Fumbling the Brawn roll automatically
+            results in injury.
+        </p>
+        <p>
+            Note that the size and shape of an object
+            might make it impossible to lift, even if it is
+            within the character’s weight capacity.
+        </p>
+    </skill>
+    <skill
+        name="Conceal"
+        chars="DEX+KEN"></skill>
+    <skill
+        name="Customs"
+        chars="INT*2"></skill>
+    <skill
+        name="Dance"
+        chars="DEX+CHA"></skill>
+    <skill
+        name="Deceit"
+        chars="INT+CHA"></skill>
+    <skill
+        name="Drive"
+        chars="DEX+KEN"></skill>
+    <skill
+        chars="CON*2"
+        nane="Endurance"></skill>
+    <skill
+        name="Evade"
+        chars="DEX*2"></skill>
+    <skill
+        name="First Aid"
+        chars="INT+DEX">
+        <p>The skill of First Aid measures a character’s
+            ability to treat minor injuries and stabilise
+            more severe ones. First Aid may be applied
+            only once per specific injury. Thus a character
+            that is slashed twice in the leg may have each
+            wound treated separately. If suffering some
+            form of bodily harm which simultaneously
+            affected several body areas at once, such as
+            being burned by Dragon Breath, then a First
+            Aid attempt is permitted for each individual
+            location.
+        </p>
+        <p>A character can self-administer First Aid, although depending on the circumstances
+            (such as the location of the wound, its degree of severity and so forth) the roll may be
+            subject to a greater degree of difficulty.
+        </p>
+        <p>Applying First Aid takes 1d3 minutes. Neither party can do anything else during the
+            treatment. When tending life threatening
+            trauma, the patient is temporarily stabilised
+            until the result of the application is known.
+            An injury that has had a previous form of
+            First Aid applied cannot benefit from First Aid again, whether successful or not, until
+            it has fully healed.
+        </p>
+        <p>First Aid relies on having appropriate
+            equipment – bandages, at the very least –
+            available for the treatment. These can be
+            improvised (a torn cloak to make a bandage
+            or sling, for example) if necessary.
+        </p>
+        <p>A critical First Aid improves the result of
+            the treatment. On a Minor Injury it recovers
+            1d6 Hit Points, on a Serious Injury it recovers 1d3 Hit Points and on a Major Injury it
+            restores partial functionality (if possible) and permits it to heal naturally.
+        </p>
+        <p>A fumbled First Aid attempt causes more
+            harm than good: the injured location suffers a
+            further 1 point of damage, potentially increasing the severity of the injury.
+        </p>
+    </skill>
+    <skill
+        name="Influence"
+        chars="CHA*2"></skill>
+    <skill
+        name="Insight"
+        chars="INT+KEN"></skill>
+    <skill
+        name="Locale"
+        chars="INT*2"></skill>
+    <skill
+        name="Perception"
+        chars="INT+KEN"></skill>
+    <skill
+        name="Ride"
+        chars="DEX+KEN"></skill>
+    <skill
+        name="Sing"
+        chars="CHA+KEN"></skill>
+    <skill
+        name="Stealth"
+        chars="INT+DEX"></skill>
+    <skill
+        name="Swim"
+        chars="STR+CON"></skill>
+    <skill
+        name="Unarmed"
+        chars="STR+DEX"></skill>
+    <skill
+        name="Willpower"
+        chars="KEN*2"></skill>
+    <skill
+        name="Acrobatics"
+        chars="STR+DEX"
+        professsional="true"></skill>
+    <skill
+        name="Art"
+        chars="KEN+CHA"
+        professsional="true"></skill>
+    <skill
+        name="Commerce"
+        chars="INT+CHA"
+        professsional="true"></skill>
+    <skill
+        name="Bureaucracy"
+        chars="INT*2"
+        professsional="true"></skill>
+    <skill
+        name="Courtesy"
+        chars="INT+CHA"
+        professsional="true"></skill>
+    <skill
+        name="Craft"
+        chars="INT+DEX"
+        professsional="true"></skill>
+    <skill
+        name="Devotion"
+        chars="KEN+CHA"
+        professsional="true"></skill>
+    <skill
+        name="Culture"
+        chars="INT*2"
+        professsional="true"></skill>
+    <skill
+        name="Disguise"
+        chars="INT+CHA"
+        professsional="true"></skill>
+
+    <skill
+        name="Engineering"
+        chars="INT*2"
+        professsional="true"></skill>
+    <skill
+        name="Exhort"
+        chars="INT+CHA"
+        professsional="true"></skill>
+    <skill
+        name="Folk Magic"
+        chars="KEN+CHA"
+        professsional="true"></skill>
+    <skill
+        name="Gambling"
+        chars="INT+KEN"
+        professsional="true"></skill>
+    <skill
+        name="Healing"
+        chars="INT+KEN"
+        professsional="true"></skill>
+    <skill
+        name="Language"
+        chars="INT+CHA"
+        professsional="true"></skill>
+    <skill
+        name="Literacy"
+        chars="INT*2"
+        professsional="true"></skill>
+    <skill
+        name="Lockpicking"
+        chars="DEX*2"
+        professsional="true"></skill>
+    <skill
+        name="Lore"
+        chars="INT*2"
+        professsional="true"></skill>
+    <skill
+        name="Nechanisms"
+        chars="DEX+INT"
+        professsional="true"></skill>
+    <skill
+        name="Musicianship"
+        chars="DEX+CHA"
+        professsional="true"></skill>
+    <skill
+        name="Navigation"
+        chars="INT+KEN"
+        professsional="true"></skill>
+    <skill
+        name="Oratory"
+        chars="KEN+CHA"
+        professsional="true"></skill>
+    <skill
+        name="Seamanship"
+        chars="INT+CON"
+        professsional="true"></skill>
+    <skill
+        name="Seduction"
+        chars="INT+CHA"
+        professsional="true"></skill>
+    <skill
+        name="Sleight"
+        chars="DEX+CHA"
+        professsional="true"></skill>
+    <skill
+        name="Streetwise"
+        chars="KEN+CHA"
+        professsional="true"></skill>
+    <skill
+        name="Survival"
+        chars="CON+KEN"
+        professsional="true"></skill>
+    <skill
+        name="Teach"
+        chars="INT+CHA"
+        professsional="true"></skill>
+    <skill
+        name="Track"
+        chars="INT+CON"
+        professsional="true"></skill>
+
+    <career
+        name="Agent"
+        combat="concealable"
+        profs="culture,disguise,language,sleight,streetwise,survival,track"
+        skills="conceal,deceit,evade,insight,perception,stealth"></career>
+    <career
+        name="Beast Handler"
+        profs="commerce,craft(animal),healing (species),lore(species),survival,teach(species),track"
+        skills="drive,endurance,first aid,influence,locale,ride,willpower"></career>
+    <career
+        name="Entertainer"
+        profs="acrobatics,disguise,oratory,musicianship,seduction,sleight,streetwise"
+        skills="athletics,brawn,dance,deceit,influence,insight,sing"></career>
+    <career
+        name="Hunter"
+        combat="hunting,culture"
+        profs="commerce,craft(hunting),loew(regional,species),mechanisms,navigation,survival,track"
+        skills="athletics,endurance,locale,perception,ride,stealth"></career>
+    <career
+        name="merchant"
+        profs="commerce,courtesy,culture,language,navigation,seamanship,streetwise"
+        skills="boating,drive,deceit,insight,influence,locale,ride"></career>
+    <career
+        name="official"
+        profs="bureaucracy,commerce,courtesy,language,literacy,lore,oratory"
+        skills="customs,deciet,influence,insight,locale,perception,willpower"></career>
+    <career
+        name="physician"
+        profs="commerce,craft,healing,language,literacy,lore,streetwise"
+        skills="dance,first aid,influence,insight,locale,sing.willpower"></career>
+    <career
+        name="priest"
+        profs="bureaucracy,devotion(specific),exhort,folk magic,literacy,lore,oratory"
+        skills="customs,dance,deceit,influence,insight,locale,willpower"></career>
+    <career
+        name="Sailor"
+        combat="ship,culture"
+        profs="craft(specific),culture,language,lore,nagivate,seamanship,survival"
+        skills="athletics,boating,brawn,endurance,locale,swim"></career>
+    <career
+        name="Scholar"
+        profs="culture,language,literacy,lore(primary),lore(secondary),oratory,teach"
+        skills="customs,influence,insight,locale,native tongue,perception,willpower"></career>
+    <career
+        name="Thief"
+        combat="concealable"
+        profs="acrobatics,commerce,disguise,lockpicking,mechanisms,sleight,streetwise"
+        skills="athletics,deceit,evade,insight,perception,stealth"></career>
+    <career
+        name="Warrior"
+        combat="culture,military,martial"
+        profs="craft,engineering,gambling,lore(military),lore(strategy,tactics),oratory,survival"
+        skills="athletics,brawn,endurance,evade,unarmed"></career>
+</resources>
