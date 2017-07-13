@@ -4,7 +4,7 @@ package com.dugsolutions.playerand.data;
  * Created by dug on 7/12/17.
  */
 
-public class Player extends Animal {
+public class Player extends Creature {
 
     short height;
 

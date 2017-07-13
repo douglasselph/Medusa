@@ -7,10 +7,10 @@ import com.dugsolutions.playerand.util.RollGroup;
  * Created by dug on 7/12/17.
  */
 
-public class Animal {
+public class Creature {
 
-    public static Animal Gen(RaceCreature race) {
-        return new Animal(race);
+    public static Creature Gen(RaceCreature race) {
+        return new Creature(race);
     }
 
     public RaceCreature race;
@@ -20,20 +20,20 @@ public class Animal {
     public short siz;
     public short dex;
     public short ins;
-    public short ken;
+    public short pow;
     public short cha;
 
     short actionPoints;
     RollGroup damageModifer;
 
-    public Animal(RaceCreature race) {
+    public Creature(RaceCreature race) {
         this.race = race;
         str = race.str.roll();
         con = race.con.roll();
         siz = race.siz.roll();
         dex = race.dex.roll();
         ins = race.ins.roll();
-        ken = race.ken.roll();
+        pow = race.pow.roll();
         cha = race.cha.roll();
     }
 

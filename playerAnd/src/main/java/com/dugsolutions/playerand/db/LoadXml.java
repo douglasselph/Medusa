@@ -7,6 +7,7 @@ import com.dugsolutions.playerand.data.RaceCreature;
 import com.dugsolutions.playerand.data.RaceLocations;
 import com.dugsolutions.playerand.data.RaceLocations.RaceLocation;
 import com.dugsolutions.playerand.R;
+import com.dugsolutions.playerand.util.Roll;
 
 import org.xmlpull.v1.XmlPullParser;
 
@@ -50,7 +51,7 @@ public class LoadXml {
             XmlResourceParser parser = ctx.getResources().getXml(fileResId);
             int eventType;
             String name;
-            RaceCreature animal = null;
+            RaceCreature creature = null;
 
             while (true) {
                 parser.next();
@@ -64,24 +65,40 @@ public class LoadXml {
                     continue;
                 }
                 if (eventType == XmlPullParser.START_TAG) {
-                    if ("creature".equals(name)) {
-                        animal = new RaceCreature();
+                    if ("creature".equals(name) || "player".equals(name)) {
+                        creature = new RaceCreature();
                         for (int i = 0; i < parser.getAttributeCount(); i++) {
                             String attName = parser.getAttributeName(i);
                             if ("name".equals(attName)) {
-                                animal.name = parser.getAttributeValue(i);
+                                TableRaceCreatures.getInstance().query(creature, name);
+                                creature.name = parser.getAttributeValue(i);
+                            } else if ("str".equals(attName)) {
+                                creature.str = new Roll(parser.getAttributeValue(i));
+                            } else if ("con".equals(attName)) {
+                                creature.con = new Roll(parser.getAttributeValue(i));
+                            } else if ("siz".equals(attName)) {
+                                creature.siz = new Roll(parser.getAttributeValue(i));
+                            } else if ("dex".equals(attName)) {
+                                creature.dex = new Roll(parser.getAttributeValue(i));
+                            } else if ("ken".equals(attName) || "pow".equals(attName)) {
+                                creature.pow = new Roll(parser.getAttributeValue(i));
+                            } else if ("cha".equals(attName)) {
+                                creature.cha = new Roll(parser.getAttributeValue(i));
+                            } else if ("ins".equals(attName) || "int".equals(attName)) {
+                                creature.ins = new Roll(parser.getAttributeValue(i));
                             }
                         }
+                        creature.isPlayer = "player".equals(name);
                     } else if ("locations".equals(name)) {
-                        if (animal == null) {
+                        if (creature == null) {
                             Timber.e("Floating locations not allowed");
                             break;
                         }
-                        animal.locations = new RaceLocations();
+                        creature.locations = new RaceLocations();
                         for (int i = 0; i < parser.getAttributeCount(); i++) {
                             String attName = parser.getAttributeName(i);
                             if ("base".equals(attName)) {
-                                animal.locations.baseExpr = parser.getAttributeValue(i);
+                                creature.locations.baseExpr = parser.getAttributeValue(i);
                             }
                         }
                     } else if ("location".equals(name)) {
@@ -91,16 +108,19 @@ public class LoadXml {
                             if ("name".equals(attName)) {
                                 location.name = parser.getAttributeValue(i);
                             } else if ("hp".equals(attName)) {
-                                location.expr = parser.getAttributeValue(i);
+                                location.hpExpr = parser.getAttributeValue(i);
                             } else if ("roll".equals(attName)) {
                                 location.roll = (short) parser.getAttributeIntValue(i, 0);
                             }
                         }
-                        animal.locations.add(location);
+                        creature.locations.add(location);
                     }
                 } else if (eventType == XmlPullParser.END_TAG) {
                     if ("creature".equals(name)) {
-                        TableCreature.getInstance().store(animal);
+                        creature.locations.sort();
+                        TableRaceCreatures.getInstance().store(creature);
+                    } else if ("player".equals(name)) {
+
                     }
                 } else if (eventType == XmlPullParser.TEXT) {
 

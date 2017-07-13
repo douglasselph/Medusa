@@ -18,8 +18,9 @@ import java.util.Comparator;
 public class RaceLocations {
 
     public static class RaceLocation implements Comparable<RaceLocation> {
+        public long id;
         public String name;
-        public String expr;
+        public String hpExpr;
         public short roll;
 
         @Override
@@ -51,8 +52,12 @@ public class RaceLocations {
         eval.setConstant("base", base);
         Locations locs = new Locations(this);
         for (int i = 0; i < locations.size(); i++) {
-            locs.hp[i] = (short) Math.round(eval.evaluate(locations.get(i).expr));
+            locs.hp[i] = (short) Math.round(eval.evaluate(locations.get(i).hpExpr));
         }
         return locs;
+    }
+
+    public ArrayList<RaceLocation> getLocations() {
+        return locations;
     }
 }
