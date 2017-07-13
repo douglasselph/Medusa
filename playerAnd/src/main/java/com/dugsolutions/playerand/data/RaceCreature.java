@@ -16,7 +16,6 @@ public class RaceCreature {
     public Roll pow;
     public Roll cha;
     public RaceLocations locations;
-    public boolean isPlayer;
 
     public short magicPoints;
     public short move;

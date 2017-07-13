@@ -1,12 +1,18 @@
 package com.dugsolutions.playerand.data;
 
+import com.dugsolutions.playerand.util.Range;
+import com.dugsolutions.playerand.util.Values;
+import com.dugsolutions.playerand.util.WeightCategory;
+
 /**
  * Created by dug on 7/12/17.
  */
 
 public class Player extends Creature {
 
-    short height;
+    short height; // cm
+    short weight; // Kg
+    short luckPoints;
 
     public Player(RaceCreature race) {
         super(race);
@@ -26,5 +32,25 @@ public class Player extends Creature {
 
     public int getHeight() {
         return height;
+    }
+
+    public int getWeight() {
+        return weight;
+    }
+
+    public int getLuckPoints() {
+        return luckPoints;
+    }
+
+    public Range getHeightRange() {
+        return Values.getInstance().getHeightRange(siz);
+    }
+
+    public Range getWeightRange(WeightCategory cat) {
+        return Values.getInstance().getWeightRange(cat, siz);
+    }
+
+    public int getInitialLuckPoints() {
+        return Values.getInstance().getLuckPoints(pow);
     }
 }

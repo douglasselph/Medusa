@@ -23,24 +23,6 @@ public class Values {
         mathEval = new MathEval();
     }
 
-    public enum WeightCategory {
-        Lithe,
-        Medium,
-        Heavy;
-
-        int getWeightMax(int siz) {
-            if (this == Lithe) {
-                return siz * 5;
-            } else if (this == Medium) {
-                return siz * 7;
-            } else if (this == Heavy) {
-                return siz * 9;
-            }
-            return 0;
-        }
-
-    }
-
     public Range getWeightRange(WeightCategory cat, int siz) {
         return new Range(cat.getWeightMax(siz - 1) + 1, cat.getWeightMax(siz));
     }
@@ -67,6 +49,10 @@ public class Values {
 
     public MathEval getMath() {
         return mathEval;
+    }
+
+    public int getLuckPoints(int pow) {
+        return (int) Math.ceil(pow / 6);
     }
 }
 

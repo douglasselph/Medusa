@@ -38,6 +38,16 @@ public class Roll {
 
     }
 
+    /**
+     * Forms handled:
+     * -1d6
+     * 3d6
+     * 3d6+1
+     * 3d6*75
+     * 3d6*75+1
+     *
+     * @param expr
+     */
     public Roll(String expr) {
         if (expr == null) {
             return;
@@ -49,26 +59,44 @@ public class Roll {
         } else {
             mult = 1;
         }
-        int dPos = expr.toLowerCase().indexOf('d');
+        int dPos = expr.indexOf('d');
         if (dPos < 0) {
-            Timber.e("Invalid expression for roll: " + expr);
-        } else {
-            int pPos = expr.indexOf('+');
-            num = (short) Integer.parseInt(expr.substring(startPos, dPos));
-            if (pPos >= 0) {
-                sides = (short) Integer.parseInt(expr.substring(dPos + 1, pPos));
-                add = (short) Integer.parseInt(expr.substring(pPos + 1));
-            } else {
-                sides = (short) Integer.parseInt(expr.substring(dPos + 1));
+            dPos = expr.indexOf('D');
+            if (dPos < 0) {
+                Timber.e("Invalid expression for roll: " + expr);
+                return;
             }
+        }
+        num = (short) Integer.parseInt(expr.substring(startPos, dPos));
+        int pPos = expr.indexOf('+');
+        int sPos = expr.indexOf('*');
+        if (pPos > 0 && sPos > 0) {
+            if (sPos > pPos) {
+                Timber.e("Invalid expression for roll: " + expr);
+                return;
+            }
+            sides = (short) Integer.parseInt(expr.substring(dPos + 1, sPos));
+            mult *= (short) Integer.parseInt(expr.substring(sPos + 1, pPos));
+            add = (short) Integer.parseInt(expr.substring(pPos + 1));
+        } else if (pPos > 0) {
+            sides = (short) Integer.parseInt(expr.substring(dPos + 1, pPos));
+            add = (short) Integer.parseInt(expr.substring(pPos + 1));
+        } else if (sPos > 0) {
+            sides = (short) Integer.parseInt(expr.substring(dPos + 1, sPos));
+            mult *= (short) Integer.parseInt(expr.substring(sPos + 1));
+            add = 0;
+        } else {
+            sides = (short) Integer.parseInt(expr.substring(dPos + 1));
+            add = 0;
         }
     }
 
     public short roll() {
         short total = add;
         for (int i = 0; i < num; i++) {
-            total += (random.nextInt(sides) + 1) * mult;
+            total += (random.nextInt(sides) + 1);
         }
+        total *= mult;
         return total;
     }
 

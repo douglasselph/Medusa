@@ -96,6 +96,7 @@ public class TableRaceLocations {
             loc.roll = cursor.getShort(idxRoll);
             locations.add(loc);
         }
+        cursor.close();
         locations.sort();
         return locations;
     }

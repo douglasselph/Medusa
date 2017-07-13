@@ -13,8 +13,9 @@ public class Creature {
         return new Creature(race);
     }
 
+    public long id;
     public RaceCreature race;
-    public String name;
+    public String name; // The name of this specific creature.
     public short str;
     public short con;
     public short siz;
@@ -23,8 +24,8 @@ public class Creature {
     public short pow;
     public short cha;
 
-    short actionPoints;
-    RollGroup damageModifer;
+    short actionPoints; // computed
+    RollGroup damageModifer; // computed
 
     public Creature(RaceCreature race) {
         this.race = race;

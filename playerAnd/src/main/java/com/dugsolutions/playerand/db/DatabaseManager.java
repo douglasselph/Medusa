@@ -29,6 +29,8 @@ public class DatabaseManager {
             init(db);
             try {
                 TableRaceCreatures.getInstance().create();
+                TableRaceLocations.getInstance().create();
+                TableRacePlayers.getInstance().create();
             } catch (Exception ex) {
                 Timber.e(ex);
             }
@@ -47,6 +49,8 @@ public class DatabaseManager {
 
         void init(SQLiteDatabase db) {
             TableRaceCreatures.Init(db);
+            TableRaceLocations.Init(db);
+            TableRacePlayers.Init(db);
         }
     }
 
