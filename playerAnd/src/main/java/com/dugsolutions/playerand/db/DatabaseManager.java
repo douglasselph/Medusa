@@ -30,7 +30,8 @@ public class DatabaseManager {
             try {
                 TableRaceCreatures.getInstance().create();
                 TableRaceLocations.getInstance().create();
-                TableRacePlayers.getInstance().create();
+                TableCreature.getInstance().create();
+                TablePlayer.getInstance().create();
             } catch (Exception ex) {
                 Timber.e(ex);
             }
@@ -50,7 +51,8 @@ public class DatabaseManager {
         void init(SQLiteDatabase db) {
             TableRaceCreatures.Init(db);
             TableRaceLocations.Init(db);
-            TableRacePlayers.Init(db);
+            TableCreature.Init(db);
+            TablePlayer.Init(db);
         }
     }
 

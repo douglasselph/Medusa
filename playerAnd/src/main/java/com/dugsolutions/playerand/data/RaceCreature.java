@@ -16,8 +16,6 @@ public class RaceCreature {
     public Roll pow;
     public Roll cha;
     public RaceLocations locations;
-
-    public short magicPoints;
-    public short move;
+    public short move; // meters
     public short strikeRank;
 }

@@ -12,7 +12,7 @@
         move="8m"
         mp="7"
         siz="1d6+6"
-        sr="16"
+        strikeRank="16"
         str="1d6+6">
         <locations ap="1">
             <location

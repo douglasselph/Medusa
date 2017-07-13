@@ -53,7 +53,7 @@ public class LoadXml {
             int eventType;
             String name;
             RaceCreature creature = null;
-            RacePlayer player = null;
+            RacePlayer player;
 
             while (true) {
                 parser.next();
@@ -86,7 +86,7 @@ public class LoadXml {
                         for (int i = 0; i < parser.getAttributeCount(); i++) {
                             String attName = parser.getAttributeName(i);
                             if ("name".equals(attName)) {
-                                TableRacePlayers.getInstance().query(player, attName);
+                                player = TableRaceCreatures.getInstance().queryPlayer(attName);
                                 player.name = parser.getAttributeValue(i);
                             }
                         }
@@ -96,15 +96,15 @@ public class LoadXml {
                         for (int i = 0; i < parser.getAttributeCount(); i++) {
                             String attName = parser.getAttributeName(i);
                             if ("creature".equals(attName)) {
-                                player.creature = TableRaceCreatures.getInstance().query(player.creature, attName);
+                                TableRaceCreatures.getInstance().query(player, attName);
                             } else if ("silver".equals(attName)) {
                                 player.silver = new Roll(parser.getAttributeValue(i));
                             } else if ("help".equals(attName)) {
                                 player.help = parser.getAttributeValue(i);
                             }
                         }
-                        parseAttributes(parser, player.creature);
-                        creature = player.creature;
+                        parseAttributes(parser, player);
+                        creature = player;
                     } else if ("locations".equals(name)) {
                         if (creature == null) {
                             Timber.e("Floating locations not allowed");
@@ -132,12 +132,9 @@ public class LoadXml {
                         creature.locations.add(location);
                     }
                 } else if (eventType == XmlPullParser.END_TAG) {
-                    if ("creature".equals(name)) {
+                    if ("creature".equals(name) || "player".equals(name)) {
                         creature.locations.sort();
                         TableRaceCreatures.getInstance().store(creature);
-                    } else if ("player".equals(name)) {
-                        player.creature.locations.sort();
-                        TableRacePlayers.getInstance().store(player);
                     }
                 } else if (eventType == XmlPullParser.TEXT) {
                 }
@@ -165,6 +162,10 @@ public class LoadXml {
                 creature.cha = new Roll(parser.getAttributeValue(i));
             } else if ("ins".equals(attName) || "int".equals(attName)) {
                 creature.ins = new Roll(parser.getAttributeValue(i));
+            } else if ("strikeRank".equals(attName)) {
+                creature.strikeRank = (short) parser.getAttributeIntValue(i, 0);
+            } else if ("move".equals(attName)) {
+                creature.move = (short) parser.getAttributeIntValue(i, 0);
             }
         }
     }

@@ -10,9 +10,11 @@ import com.dugsolutions.playerand.util.WeightCategory;
 
 public class Player extends Creature {
 
-    short height; // cm
-    short weight; // Kg
-    short luckPoints;
+    public short height; // cm
+    public short weight; // Kg
+    public short luckPoints; // computed
+    public short magicPoints; // computed
+    public short silver;
 
     public Player(RaceCreature race) {
         super(race);
@@ -30,18 +32,6 @@ public class Player extends Creature {
         return (int) Math.ceil(con / 6);
     }
 
-    public int getHeight() {
-        return height;
-    }
-
-    public int getWeight() {
-        return weight;
-    }
-
-    public int getLuckPoints() {
-        return luckPoints;
-    }
-
     public Range getHeightRange() {
         return Values.getInstance().getHeightRange(siz);
     }
@@ -52,5 +42,12 @@ public class Player extends Creature {
 
     public int getInitialLuckPoints() {
         return Values.getInstance().getLuckPoints(pow);
+    }
+
+    public int getStrikeRank() {
+        if (race.strikeRank == 0) {
+            return (ins + dex) / 2;
+        }
+        return race.strikeRank;
     }
 }

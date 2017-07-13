@@ -32,7 +32,7 @@ public class TableCreature {
     static TableCreature sInstance;
 
     static void Init(SQLiteDatabase db) {
-        new TableCreature(db);
+        sInstance = new TableCreature(db);
     }
 
     public static TableCreature getInstance() {
@@ -42,14 +42,23 @@ public class TableCreature {
     final SQLiteDatabase mDb;
 
     TableCreature(SQLiteDatabase db) {
-        this.mDb = db;
-        sInstance = this;
+        mDb = db;
+    }
+
+    protected String getTableName() {
+        return TABLE_NAME;
     }
 
     public void create() {
         StringBuilder sbuf = new StringBuilder();
+        create(sbuf);
+        sbuf.append(")");
+        mDb.execSQL(sbuf.toString());
+    }
+
+    protected void create(StringBuilder sbuf) {
         sbuf.append("create table ");
-        sbuf.append(TABLE_NAME);
+        sbuf.append(getTableName());
         sbuf.append(" (");
         sbuf.append(KEY_ROWID);
         sbuf.append(" integer primary key autoincrement, ");
@@ -70,29 +79,20 @@ public class TableCreature {
         sbuf.append(KEY_CHA);
         sbuf.append(" tinyint, ");
         sbuf.append(KEY_RACE_ID);
-        sbuf.append(" int)");
-        mDb.execSQL(sbuf.toString());
+        sbuf.append(" int");
     }
 
     public void store(Creature creature) {
         mDb.beginTransaction();
         try {
             ContentValues values = new ContentValues();
-            values.put(KEY_NAME, creature.name);
-            values.put(KEY_STR, creature.str);
-            values.put(KEY_CON, creature.con);
-            values.put(KEY_SIZ, creature.siz);
-            values.put(KEY_DEX, creature.dex);
-            values.put(KEY_INT, creature.ins);
-            values.put(KEY_POW, creature.pow);
-            values.put(KEY_CHA, creature.cha);
-            values.put(KEY_RACE_ID, creature.race.id);
+            fill(values, creature);
             if (creature.id > 0) {
                 String where = KEY_ROWID + "=?";
                 String[] whereArgs = {Long.toString(creature.id)};
-                mDb.update(TABLE_NAME, values, where, whereArgs);
+                mDb.update(getTableName(), values, where, whereArgs);
             } else {
-                creature.id = mDb.insert(TABLE_NAME, null, values);
+                creature.id = mDb.insert(getTableName(), null, values);
             }
             mDb.setTransactionSuccessful();
         } catch (Exception ex) {
@@ -102,25 +102,42 @@ public class TableCreature {
         }
     }
 
+    protected void fill(ContentValues values, Creature creature) {
+        values.put(KEY_NAME, creature.name);
+        values.put(KEY_STR, creature.str);
+        values.put(KEY_CON, creature.con);
+        values.put(KEY_SIZ, creature.siz);
+        values.put(KEY_DEX, creature.dex);
+        values.put(KEY_INT, creature.ins);
+        values.put(KEY_POW, creature.pow);
+        values.put(KEY_CHA, creature.cha);
+        values.put(KEY_RACE_ID, creature.race.id);
+    }
+
     public Creature query(String name) {
         String selection = KEY_NAME + "=?";
         String[] selectionArgs = {name};
-        Cursor cursor = mDb.query(TABLE_NAME, null, selection, selectionArgs, null, null, null, null);
+        Cursor cursor = mDb.query(getTableName(), null, selection, selectionArgs, null, null, null, null);
         Creature creature = null;
         if (cursor.getCount() > 0) {
             if (cursor.getCount() > 1) {
                 Timber.e("Found too many creatures named: " + name);
             }
             if (cursor.moveToFirst()) {
-
+                creature = fill(cursor);
             }
         }
         cursor.close();
         return creature;
     }
 
-    void fill(Cursor cursor, Creature creature) {
+    protected Creature create(RaceCreature race) {
+        return new Creature(race);
+    }
+
+    protected Creature fill(Cursor cursor) {
         final int idxRowId = cursor.getColumnIndex(KEY_ROWID);
+        final int idxName = cursor.getColumnIndex(KEY_NAME);
         final int idxStr = cursor.getColumnIndex(KEY_STR);
         final int idxCon = cursor.getColumnIndex(KEY_CON);
         final int idxSiz = cursor.getColumnIndex(KEY_SIZ);
@@ -131,8 +148,9 @@ public class TableCreature {
         final int idxRace = cursor.getColumnIndex(KEY_RACE_ID);
         long raceId = cursor.getLong(idxRace);
         RaceCreature race = TableRaceCreatures.getInstance().query(raceId);
-        creature = new Creature(race);
+        Creature creature = create(race);
         creature.id = cursor.getLong(idxRowId);
+        creature.name = cursor.getString(idxName);
         creature.str = cursor.getShort(idxStr);
         creature.con = cursor.getShort(idxCon);
         creature.siz = cursor.getShort(idxSiz);
@@ -140,6 +158,7 @@ public class TableCreature {
         creature.ins = cursor.getShort(idxInt);
         creature.pow = cursor.getShort(idxPow);
         creature.cha = cursor.getShort(idxCha);
+        return creature;
     }
 
 }
