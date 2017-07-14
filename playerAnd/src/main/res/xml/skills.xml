@@ -286,120 +286,120 @@
     <skill
         name="Acrobatics"
         chars="STR+DEX"
-        professsional="true"></skill>
+        professional="true"></skill>
     <skill
         name="Art"
         chars="KEN+CHA"
-        professsional="true"></skill>
+        professional="true"></skill>
     <skill
         name="Commerce"
         chars="INT+CHA"
-        professsional="true"></skill>
+        professional="true"></skill>
     <skill
         name="Bureaucracy"
         chars="INT*2"
-        professsional="true"></skill>
+        professional="true"></skill>
     <skill
         name="Courtesy"
         chars="INT+CHA"
-        professsional="true"></skill>
+        professional="true"></skill>
     <skill
         name="Craft"
         chars="INT+DEX"
-        professsional="true"></skill>
+        professional="true"></skill>
     <skill
         name="Devotion"
         chars="KEN+CHA"
-        professsional="true"></skill>
+        professional="true"></skill>
     <skill
         name="Culture"
         chars="INT*2"
-        professsional="true"></skill>
+        professional="true"></skill>
     <skill
         name="Disguise"
         chars="INT+CHA"
-        professsional="true"></skill>
+        professional="true"></skill>
 
     <skill
         name="Engineering"
         chars="INT*2"
-        professsional="true"></skill>
+        professional="true"></skill>
     <skill
         name="Exhort"
         chars="INT+CHA"
-        professsional="true"></skill>
+        professional="true"></skill>
     <skill
         name="Folk Magic"
         chars="KEN+CHA"
-        professsional="true"></skill>
+        professional="true"></skill>
     <skill
         name="Gambling"
         chars="INT+KEN"
-        professsional="true"></skill>
+        professional="true"></skill>
     <skill
         name="Healing"
         chars="INT+KEN"
-        professsional="true"></skill>
+        professional="true"></skill>
     <skill
         name="Language"
         chars="INT+CHA"
-        professsional="true"></skill>
+        professional="true"></skill>
     <skill
         name="Literacy"
         chars="INT*2"
-        professsional="true"></skill>
+        professional="true"></skill>
     <skill
         name="Lockpicking"
         chars="DEX*2"
-        professsional="true"></skill>
+        professional="true"></skill>
     <skill
         name="Lore"
         chars="INT*2"
-        professsional="true"></skill>
+        professional="true"></skill>
     <skill
         name="Nechanisms"
         chars="DEX+INT"
-        professsional="true"></skill>
+        professional="true"></skill>
     <skill
         name="Musicianship"
         chars="DEX+CHA"
-        professsional="true"></skill>
+        professional="true"></skill>
     <skill
         name="Navigation"
         chars="INT+KEN"
-        professsional="true"></skill>
+        professional="true"></skill>
     <skill
         name="Oratory"
         chars="KEN+CHA"
-        professsional="true"></skill>
+        professional="true"></skill>
     <skill
         name="Seamanship"
         chars="INT+CON"
-        professsional="true"></skill>
+        professional="true"></skill>
     <skill
         name="Seduction"
         chars="INT+CHA"
-        professsional="true"></skill>
+        professional="true"></skill>
     <skill
         name="Sleight"
         chars="DEX+CHA"
-        professsional="true"></skill>
+        professional="true"></skill>
     <skill
         name="Streetwise"
         chars="KEN+CHA"
-        professsional="true"></skill>
+        professional="true"></skill>
     <skill
         name="Survival"
         chars="CON+KEN"
-        professsional="true"></skill>
+        professional="true"></skill>
     <skill
         name="Teach"
         chars="INT+CHA"
-        professsional="true"></skill>
+        professional="true"></skill>
     <skill
         name="Track"
         chars="INT+CON"
-        professsional="true"></skill>
+        professional="true"></skill>
 
     <career
         name="Agent"

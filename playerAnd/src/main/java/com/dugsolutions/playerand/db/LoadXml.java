@@ -8,6 +8,7 @@ import com.dugsolutions.playerand.data.RaceLocations;
 import com.dugsolutions.playerand.data.RaceLocations.RaceLocation;
 import com.dugsolutions.playerand.R;
 import com.dugsolutions.playerand.data.RacePlayer;
+import com.dugsolutions.playerand.data.Skill;
 import com.dugsolutions.playerand.util.Roll;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -54,6 +55,7 @@ public class LoadXml {
             String name;
             RaceCreature creature = null;
             RacePlayer player;
+            Skill skill = null;
 
             while (true) {
                 parser.next();
@@ -130,18 +132,45 @@ public class LoadXml {
                             }
                         }
                         creature.locations.add(location);
+                    } else if ("skill".equals(name)) {
+                        skill = null;
+                        for (int i = 0; i < parser.getAttributeCount(); i++) {
+                            String attName = parser.getAttributeName(i);
+                            if ("name".equals(attName)) {
+                                skill = TableSkill.getInstance().query(skill, attName);
+                            }
+                        }
+                        if (skill == null) {
+                            Timber.e("Missing skill name");
+                        }
+                        for (int i = 0; i < parser.getAttributeCount(); i++) {
+                            String attName = parser.getAttributeName(i);
+                            if ("chars".equals(attName)) {
+                                skill.base = parser.getAttributeValue(i);
+                            } else if ("parent".equals(attName)) {
+                                String parentName = parser.getAttributeValue(i);
+                                skill.parent = TableSkill.getInstance().query(parentName);
+                            }
+                        }
                     }
                 } else if (eventType == XmlPullParser.END_TAG) {
                     if ("creature".equals(name) || "player".equals(name)) {
                         creature.locations.sort();
                         TableRaceCreatures.getInstance().store(creature);
+                        creature = null;
+                    } else if ("skill".equals(name)) {
+                        TableSkill.getInstance().store(skill);
+                        skill = null;
                     }
                 } else if (eventType == XmlPullParser.TEXT) {
+                    if (skill != null) {
+                        skill.desc = parser.getText();
+                    }
                 }
 
             }
         } catch (Exception ex) {
-
+            Timber.e(ex);
         }
     }
 

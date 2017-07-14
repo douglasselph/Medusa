@@ -13,6 +13,7 @@ import com.dugsolutions.playerand.data.RaceCreature;
  */
 
 public class TablePlayer extends TableCreature {
+
     static final String TABLE_NAME = "players";
 
     static final String KEY_SILVER       = "silver";

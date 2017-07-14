@@ -124,6 +124,7 @@ public class TableCreature {
                 Timber.e("Found too many creatures named: " + name);
             }
             if (cursor.moveToFirst()) {
+                creature.name = name;
                 creature = fill(cursor);
             }
         }

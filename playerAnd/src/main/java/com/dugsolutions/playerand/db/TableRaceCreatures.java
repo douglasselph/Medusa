@@ -153,6 +153,7 @@ public class TableRaceCreatures {
         Cursor cursor = mDb.query(TABLE_NAME, null, selection, selectionArgs, null, null, null, null);
         if (cursor.getCount() >= 1) {
             if (cursor.moveToFirst()) {
+                creature.name = name;
                 fill(cursor, creature);
             }
             if (cursor.getCount() > 1) {
