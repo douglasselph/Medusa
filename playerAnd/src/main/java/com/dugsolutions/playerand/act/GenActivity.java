@@ -28,6 +28,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import timber.log.Timber;
 
 public class GenActivity extends AppCompatActivity {
 
@@ -88,6 +89,12 @@ public class GenActivity extends AppCompatActivity {
             public void onClick(View v) {
                 mPlayer.roll();
                 fillStage();
+            }
+        });
+        mPrevRace.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                nextRace(-1);
             }
         });
         mNextRace.setOnClickListener(new View.OnClickListener() {

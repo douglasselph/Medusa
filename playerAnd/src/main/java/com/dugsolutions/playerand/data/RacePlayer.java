@@ -15,4 +15,9 @@ public class RacePlayer extends RaceCreature {
         super();
     }
 
+    public void copy(RacePlayer other) {
+        super.copy(other);
+        help = other.help;
+        silver = other.silver;
+    }
 }

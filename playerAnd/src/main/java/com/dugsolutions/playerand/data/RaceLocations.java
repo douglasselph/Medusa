@@ -18,10 +18,19 @@ import java.util.Comparator;
 public class RaceLocations {
 
     public static class RaceLocation implements Comparable<RaceLocation> {
-        public long id;
+        public long   id;
         public String name;
         public String hpExpr;
-        public short roll;
+        public short  roll;
+
+        public RaceLocation() {
+        }
+
+        public RaceLocation(RaceLocation other) {
+            name = other.name;
+            hpExpr = other.hpExpr;
+            roll = other.roll;
+        }
 
         @Override
         public int compareTo(@NonNull RaceLocation o) {
@@ -33,6 +42,18 @@ public class RaceLocations {
     public String baseExpr;
 
     public RaceLocations() {
+    }
+
+    public RaceLocations(RaceLocations other) {
+        copy(other);
+    }
+
+    public void copy(RaceLocations other) {
+        locations.clear();
+        for (RaceLocation loc : other.locations) {
+            locations.add(new RaceLocation(loc));
+        }
+        baseExpr = other.baseExpr;
     }
 
     public void add(RaceLocation location) {

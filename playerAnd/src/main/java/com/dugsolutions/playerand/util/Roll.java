@@ -25,6 +25,13 @@ public class Roll {
     public short add;
     short mult;
 
+    public Roll(Roll other) {
+        num = other.num;
+        sides = other.sides;
+        add = other.add;
+        mult = other.mult;
+    }
+
     public Roll(int num, int sides, int add) {
         this.num = (short) num;
         this.add = (short) add;

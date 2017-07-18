@@ -45,13 +45,13 @@ public class LoadXml {
     }
 
     void load() {
-        load(R.xml.creatures);
+//        load(R.xml.creatures);
         load(R.xml.player);
-        load(R.xml.combat);
-        load(R.xml.culture);
-        load(R.xml.equipment);
-        load(R.xml.skills);
-        load(R.xml.spells);
+//        load(R.xml.combat);
+//        load(R.xml.culture);
+//        load(R.xml.equipment);
+//        load(R.xml.skills);
+//        load(R.xml.spells);
     }
 
     void load(int fileResId) {
@@ -80,8 +80,8 @@ public class LoadXml {
                         for (int i = 0; i < parser.getAttributeCount(); i++) {
                             String attName = parser.getAttributeName(i);
                             if ("name".equals(attName)) {
-                                creature = TableRaceCreatures.getInstance().query(creature, attName);
-                                creature.name = parser.getAttributeValue(i);
+                                String value = parser.getAttributeValue(i);
+                                creature = TableRaceCreatures.getInstance().query(creature, value);
                             }
                         }
                         if (creature == null) {
@@ -94,8 +94,8 @@ public class LoadXml {
                         for (int i = 0; i < parser.getAttributeCount(); i++) {
                             String attName = parser.getAttributeName(i);
                             if ("name".equals(attName)) {
-                                player = TableRaceCreatures.getInstance().queryPlayer(attName);
-                                player.name = parser.getAttributeValue(i);
+                                String value = parser.getAttributeValue(i);
+                                player = TableRaceCreatures.getInstance().queryPlayer(value);
                             }
                         }
                         if (player == null) {
@@ -104,11 +104,19 @@ public class LoadXml {
                         for (int i = 0; i < parser.getAttributeCount(); i++) {
                             String attName = parser.getAttributeName(i);
                             if ("creature".equals(attName)) {
-                                TableRaceCreatures.getInstance().query(player, attName);
-                            } else if ("silver".equals(attName)) {
-                                player.silver = new Roll(parser.getAttributeValue(i));
+                                String value = parser.getAttributeValue(i);
+                                RaceCreature other = TableRaceCreatures.getInstance().query(value);
+                                player.copy(other);
+                            }
+                        }
+                        for (int i = 0; i < parser.getAttributeCount(); i++) {
+                            String attName = parser.getAttributeName(i);
+                            if ("silver".equals(attName)) {
+                                String value = parser.getAttributeValue(i);
+                                player.silver = new Roll(value);
                             } else if ("help".equals(attName)) {
-                                player.help = parser.getAttributeValue(i);
+                                String value = parser.getAttributeValue(i);
+                                player.help = value;
                             }
                         }
                         parseAttributes(parser, player);
@@ -130,9 +138,11 @@ public class LoadXml {
                         for (int i = 0; i < parser.getAttributeCount(); i++) {
                             String attName = parser.getAttributeName(i);
                             if ("name".equals(attName)) {
-                                location.name = parser.getAttributeValue(i);
+                                String value = parser.getAttributeValue(i);
+                                location.name = value;
                             } else if ("hp".equals(attName)) {
-                                location.hpExpr = parser.getAttributeValue(i);
+                                String value = parser.getAttributeValue(i);
+                                location.hpExpr = value;
                             } else if ("roll".equals(attName)) {
                                 location.roll = (short) parser.getAttributeIntValue(i, 0);
                             }
@@ -143,7 +153,8 @@ public class LoadXml {
                         for (int i = 0; i < parser.getAttributeCount(); i++) {
                             String attName = parser.getAttributeName(i);
                             if ("name".equals(attName)) {
-                                skill = TableSkill.getInstance().query(skill, attName);
+                                String value = parser.getAttributeValue(i);
+                                skill = TableSkill.getInstance().query(skill, value);
                             }
                         }
                         if (skill == null) {
@@ -160,13 +171,15 @@ public class LoadXml {
                         }
                     }
                 } else if (eventType == XmlPullParser.END_TAG) {
+                    Timber.d("MYDEBUG END TAG " + name);
                     if ("creature".equals(name) || "player".equals(name)) {
-                        creature.locations.sort();
                         TableRaceCreatures.getInstance().store(creature);
                         creature = null;
                     } else if ("skill".equals(name)) {
                         TableSkill.getInstance().store(skill);
                         skill = null;
+                    } else if ("locations".equals(name)) {
+                        creature.locations.sort();
                     }
                 } else if (eventType == XmlPullParser.TEXT) {
                     if (skill != null) {
@@ -174,6 +187,7 @@ public class LoadXml {
                     }
                 }
             }
+            parser.close();
         } catch (Exception ex) {
             Timber.e(ex);
         }

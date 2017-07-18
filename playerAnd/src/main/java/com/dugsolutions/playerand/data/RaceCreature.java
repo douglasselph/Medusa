@@ -18,4 +18,23 @@ public class RaceCreature {
     public RaceLocations locations;
     public short move; // meters
     public short strikeRank;
+
+    public void copy(RaceCreature other) {
+        if (other.str != null) {
+            str = other.str;
+            con = other.con;
+            siz = other.siz;
+            dex = other.dex;
+            ins = other.ins;
+            pow = other.pow;
+            cha = other.cha;
+        }
+        move = other.move;
+        strikeRank = other.strikeRank;
+        if (locations == null) {
+            locations = new RaceLocations(other.locations);
+        } else {
+            locations.copy(other.locations);
+        }
+    }
 }

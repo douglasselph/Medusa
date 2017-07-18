@@ -34,6 +34,7 @@
 
         <TextView
             android:id="@+id/race_name"
+            style="@style/RaceName"
             android:layout_width="@dimen/race_label_width"
             android:layout_height="match_parent"
             android:layout_below="@id/player_name"

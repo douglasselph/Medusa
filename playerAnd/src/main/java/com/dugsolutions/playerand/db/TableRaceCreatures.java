@@ -93,6 +93,7 @@ public class TableRaceCreatures {
     }
 
     public void store(RaceCreature creature) {
+        Timber.d("MYDBEUG: store(" + creature.name + ", ID=" + creature.id + ")");
         mDb.beginTransaction();
         try {
             ContentValues values = new ContentValues();
@@ -105,9 +106,30 @@ public class TableRaceCreatures {
                 String[] whereArgs = {Long.toString(creature.id)};
                 mDb.update(TABLE_NAME, values, where, whereArgs);
             } else {
-                creature.id = mDb.insert(TABLE_NAME, null, values);
+                String where = KEY_NAME + "=?";
+                String[] whereArgs = {creature.name};
+                if (mDb.update(TABLE_NAME, values, where, whereArgs) == 0) {
+                    creature.id = mDb.insert(TABLE_NAME, null, values);
+                } else {
+                    String[] columns = {KEY_ROWID};
+                    Cursor cursor = mDb.query(TABLE_NAME, columns, where, whereArgs, null, null, null, null);
+                    if (cursor.getCount() > 0) {
+                        creature.id = cursor.getLong(cursor.getColumnIndex(KEY_ROWID));
+                        if (cursor.getCount() > 1) {
+                            Timber.e("store: found too many creatures with the name: " + creature.name + " [" + cursor.getCount() + "]");
+                            while (cursor.moveToNext()) {
+                                Timber.e("ROWID=" + cursor.getLong(cursor.getColumnIndex(KEY_ROWID)));
+                            }
+                        }
+                    } else {
+                        Timber.e("Problem locating creature with name: " + creature.name);
+                    }
+                    cursor.close();
+                }
             }
-            TableRaceLocations.getInstance().store(creature.id, creature.locations);
+            if (creature.locations != null) {
+                TableRaceLocations.getInstance().store(creature.id, creature.locations);
+            }
             mDb.setTransactionSuccessful();
         } catch (Exception ex) {
             Timber.e(ex);
@@ -118,14 +140,18 @@ public class TableRaceCreatures {
 
     void fill(ContentValues values, RaceCreature creature) {
         values.put(KEY_NAME, creature.name);
-        values.put(KEY_STR, creature.str.toString());
-        values.put(KEY_CON, creature.con.toString());
-        values.put(KEY_SIZ, creature.siz.toString());
-        values.put(KEY_DEX, creature.dex.toString());
-        values.put(KEY_INT, creature.ins.toString());
-        values.put(KEY_POW, creature.pow.toString());
-        values.put(KEY_CHA, creature.cha.toString());
-        values.put(KEY_LOC_BASE, creature.locations.baseExpr);
+        if (creature.str != null) {
+            values.put(KEY_STR, creature.str.toString());
+            values.put(KEY_CON, creature.con.toString());
+            values.put(KEY_SIZ, creature.siz.toString());
+            values.put(KEY_DEX, creature.dex.toString());
+            values.put(KEY_INT, creature.ins.toString());
+            values.put(KEY_POW, creature.pow.toString());
+            values.put(KEY_CHA, creature.cha.toString());
+        }
+        if (creature.locations != null) {
+            values.put(KEY_LOC_BASE, creature.locations.baseExpr);
+        }
         values.put(KEY_MOVE, creature.move);
         values.put(KEY_STRIKE_RANK, creature.strikeRank);
     }
@@ -158,8 +184,10 @@ public class TableRaceCreatures {
                 fill(cursor, creature);
             }
             if (cursor.getCount() > 1) {
-                Timber.e("Found too many creatures with the name: " + name);
+                Timber.e("query: found too many creatures with the name: " + name + " [" + cursor.getCount() + "]");
             }
+        } else {
+            creature.name = name;
         }
         cursor.close();
         return creature;
@@ -246,6 +274,7 @@ public class TableRaceCreatures {
     public ArrayList<RaceCreature> query(Cursor cursor) {
         ArrayList<RaceCreature> list = new ArrayList();
         final int idxRowId = cursor.getColumnIndex(KEY_ROWID);
+        final int idxName = cursor.getColumnIndex(KEY_NAME);
         final int idxStr = cursor.getColumnIndex(KEY_STR);
         final int idxCon = cursor.getColumnIndex(KEY_CON);
         final int idxSiz = cursor.getColumnIndex(KEY_SIZ);
@@ -270,6 +299,7 @@ public class TableRaceCreatures {
                 creature = new RaceCreature();
             }
             creature.id = cursor.getLong(idxRowId);
+            creature.name = cursor.getString(idxName);
             creature.str = new Roll(cursor.getString(idxStr));
             creature.con = new Roll(cursor.getString(idxCon));
             creature.siz = new Roll(cursor.getString(idxSiz));

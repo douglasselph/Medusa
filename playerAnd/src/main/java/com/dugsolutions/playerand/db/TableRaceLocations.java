@@ -26,7 +26,7 @@ public class TableRaceLocations {
     static TableRaceLocations sInstance;
 
     static void Init(SQLiteDatabase db) {
-        new TableRaceCreatures(db);
+        new TableRaceLocations(db);
     }
 
     public static TableRaceLocations getInstance() {
@@ -98,6 +98,19 @@ public class TableRaceLocations {
         }
         cursor.close();
         locations.sort();
+        if (locations.getLocations().size() == 0) {
+            Timber.e("Could not find any locations for RACE_ID " + race_id);
+            cursor = mDb.query(TABLE_NAME, null, null, null, null, null, null, null);
+            while (cursor.moveToNext()) {
+                final int idxRowId = cursor.getColumnIndex(KEY_ROWID);
+                final int idxRaceId = cursor.getColumnIndex(KEY_RACE_ID);
+                final int idxName = cursor.getColumnIndex(KEY_NAME);
+                final int idxHpExpr = cursor.getColumnIndex(KEY_HP_EXPR);
+                final int idxRoll = cursor.getColumnIndex(KEY_ROLL);
+                Timber.d("RACE ID=" + cursor.getLong(idxRaceId) + ", NAME=" + cursor.getString(idxName));
+            }
+            cursor.close();
+        }
         return locations;
     }
 
