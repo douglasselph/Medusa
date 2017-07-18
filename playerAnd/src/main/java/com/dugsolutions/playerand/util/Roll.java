@@ -114,4 +114,18 @@ public class Roll {
         }
         return sbuf.toString();
     }
+
+    public int getMin() {
+        int total = add;
+        total += num;
+        total *= mult;
+        return total;
+    }
+
+    public int getMax() {
+        int total = add;
+        total += num * sides;
+        total *= mult;
+        return total;
+    }
 }

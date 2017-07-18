@@ -25,7 +25,7 @@ public class MyApplication extends Application {
         }
         DatabaseManager.Init(this);
         Roll.Init();
-        LoadXml.Init(this);
         Values.Init();
+        LoadXml.Load(this);
     }
 }

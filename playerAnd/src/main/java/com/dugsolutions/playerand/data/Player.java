@@ -1,5 +1,6 @@
 package com.dugsolutions.playerand.data;
 
+import com.dugsolutions.playerand.db.TableRaceCreatures;
 import com.dugsolutions.playerand.util.Range;
 import com.dugsolutions.playerand.util.Values;
 import com.dugsolutions.playerand.util.WeightCategory;

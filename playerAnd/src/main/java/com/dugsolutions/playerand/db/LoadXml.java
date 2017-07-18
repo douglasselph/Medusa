@@ -45,7 +45,13 @@ public class LoadXml {
     }
 
     void load() {
+        load(R.xml.creatures);
         load(R.xml.player);
+        load(R.xml.combat);
+        load(R.xml.culture);
+        load(R.xml.equipment);
+        load(R.xml.skills);
+        load(R.xml.spells);
     }
 
     void load(int fileResId) {
@@ -167,7 +173,6 @@ public class LoadXml {
                         skill.desc = parser.getText();
                     }
                 }
-
             }
         } catch (Exception ex) {
             Timber.e(ex);

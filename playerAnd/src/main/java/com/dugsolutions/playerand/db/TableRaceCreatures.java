@@ -9,6 +9,7 @@ import com.dugsolutions.playerand.data.RacePlayer;
 import com.dugsolutions.playerand.util.Roll;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import timber.log.Timber;
 
@@ -32,9 +33,9 @@ public class TableRaceCreatures {
     static final String KEY_LOC_BASE    = "loc_base";
     static final String KEY_MOVE        = "move";
     static final String KEY_STRIKE_RANK = "sr";
-    static final String KEY_HELP      = "help";
-    static final String KEY_SILVER    = "silver";
-    static final String KEY_IS_PLAYER = "is_player";
+    static final String KEY_HELP        = "help";
+    static final String KEY_SILVER      = "silver";
+    static final String KEY_IS_PLAYER   = "is_player";
 
     static TableRaceCreatures sInstance;
 
@@ -220,9 +221,30 @@ public class TableRaceCreatures {
         return creature;
     }
 
+
     public ArrayList<RaceCreature> query() {
-        ArrayList<RaceCreature> list = new ArrayList();
         Cursor cursor = mDb.query(TABLE_NAME, null, null, null, null, null, null, null);
+        ArrayList<RaceCreature> list = query(cursor);
+        cursor.close();
+        return list;
+    }
+
+    public List<RacePlayer> queryPlayers() {
+        String selection = KEY_IS_PLAYER + "=1";
+        Cursor cursor = mDb.query(TABLE_NAME, null, selection, null, null, null, null, null);
+        ArrayList<RaceCreature> list = query(cursor);
+        cursor.close();
+        ArrayList<RacePlayer> players = new ArrayList();
+        for (RaceCreature creature : list) {
+            if (creature instanceof RacePlayer) {
+                players.add((RacePlayer) creature);
+            }
+        }
+        return players;
+    }
+
+    public ArrayList<RaceCreature> query(Cursor cursor) {
+        ArrayList<RaceCreature> list = new ArrayList();
         final int idxRowId = cursor.getColumnIndex(KEY_ROWID);
         final int idxStr = cursor.getColumnIndex(KEY_STR);
         final int idxCon = cursor.getColumnIndex(KEY_CON);
@@ -261,7 +283,6 @@ public class TableRaceCreatures {
             creature.strikeRank = cursor.getShort(idxStrikeRank);
             list.add(creature);
         }
-        cursor.close();
         return list;
     }
 

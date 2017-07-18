@@ -29,6 +29,10 @@ public class Creature {
 
     public Creature(RaceCreature race) {
         this.race = race;
+        roll();
+    }
+
+    public void roll() {
         str = race.str.roll();
         con = race.con.roll();
         siz = race.siz.roll();

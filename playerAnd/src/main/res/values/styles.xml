@@ -29,6 +29,11 @@
         <item name="android:textAllCaps">true</item>
     </style>
 
+    <style name="AttrHelp">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
     <style name="FrameButton">
         <item name="android:textSize">18sp</item>
         <item name="android:background">@color/common_blue</item>
@@ -45,5 +50,14 @@
     <style name="DetailsValue">
         <item name="android:textSize">18sp</item>
         <item name="android:textAllCaps">true</item>
+    </style>
+    <style name="ListItem">
+        <item name="android:textSize">22sp</item>
+    </style>
+    <style name="ListText">
+        <item name="android:textSize">20sp</item>
+    </style>
+    <style name="ListSubText">
+        <item name="android:textSize">18sp</item>
     </style>
 </resources>
