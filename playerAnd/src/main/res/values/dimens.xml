@@ -7,11 +7,14 @@
     <dimen name="attr_margin_top_spacing">5dp</dimen>
     <dimen name="attr_margin_top_adjust">13dp</dimen>
     <dimen name="attr_margin_right">20dp</dimen>
+    <dimen name="stat_item_margin_top">5dp</dimen>
+    <dimen name="stat_item_margin_right">9dp</dimen>
     <dimen name="details_attr_spacing">15dp</dimen>
     <dimen name="details_attr_gap">5dp</dimen>
     <dimen name="details_attr_v_spacing">10dp</dimen>
     <dimen name="arrow_size">40dp</dimen>
     <dimen name="race_label_width">120dp</dimen>
     <integer name="attr_target_points">90</integer>
+    <integer name="stat_value_ems">3</integer>
 
 </resources>

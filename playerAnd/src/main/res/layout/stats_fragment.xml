@@ -1,0 +1,166 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="3dp"
+        android:layout_marginRight="10dp"
+        android:columnCount="2"
+        android:orientation="horizontal"
+        tools:context="com.dugsolutions.playerand.act.StatsFragment">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/StatItemLabel"
+            android:text="@string/attr_action_points"/>
+
+        <TextView
+            android:id="@+id/attr_action_points_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/StatItemValue"
+            android:text="0"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            style="@style/StatItemLabel"
+            android:text="@string/attr_damage_mod"/>
+
+        <TextView
+            android:id="@+id/attr_damage_mod_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/StatItemValue"
+            android:text="0"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/StatItemLabel"
+            android:text="@string/attr_exp_mod"/>
+
+        <TextView
+            android:id="@+id/attr_exp_mod_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/stat_item_margin_top"
+            style="@style/StatItemValue"
+            android:text="0"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/attr_healing_rate"
+            style="@style/StatItemLabel"/>
+
+        <TextView
+            android:id="@+id/attr_healing_rate_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/StatItemValue"
+            android:text="0"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/attr_height"
+            style="@style/StatItemLabel"/>
+
+        <TextView
+            android:id="@+id/attr_height"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/StatItemValue"
+            android:text="0"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/attr_weight"
+            style="@style/StatItemLabel"/>
+
+        <TextView
+            android:id="@+id/attr_weight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/StatItemValue"
+            android:text="0"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/attr_hit_points"
+            style="@style/StatItemLabel"/>
+
+        <TextView
+            android:id="@+id/attr_hit_points"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/StatItemValue"
+            android:text="0"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/attr_magic_points"
+            style="@style/StatItemLabel"/>
+
+        <TextView
+            android:id="@+id/attr_magic_points"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/StatItemValue"
+            android:text="0"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/attr_move_rate"
+            style="@style/StatItemLabel"/>
+
+        <TextView
+            android:id="@+id/attr_move_rate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/StatItemValue"
+            android:text="0"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/attr_strike_rank"
+            style="@style/StatItemLabel"/>
+
+        <TextView
+            android:id="@+id/attr_strike_rank"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/StatItemValue"
+            android:text="0"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/attr_luck_points"
+            style="@style/StatItemLabel"/>
+
+        <TextView
+            android:id="@+id/attr_luck_points"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/StatItemValue"
+            android:text="0"/>
+
+    </GridLayout>
+
+
+</RelativeLayout>

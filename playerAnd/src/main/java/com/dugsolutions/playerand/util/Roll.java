@@ -18,6 +18,10 @@ public class Roll {
         return new Roll(num, sides, add).roll();
     }
 
+    public static Random getRandom() {
+        return random;
+    }
+
     static Random random;
 
     public short num;

@@ -5,16 +5,25 @@
     <string name="btn_next">Next</string>
     <string name="btn_roll">Roll</string>
     <string name="btn_create">Create</string>
-    <string name="attr_str">STR</string>
-    <string name="attr_con">CON</string>
-    <string name="attr_siz">SIZ</string>
-    <string name="attr_dex">DEX</string>
-    <string name="attr_int">INT</string>
-    <string name="attr_ken">KEN</string>
-    <string name="attr_cha">CHA</string>
+    <string name="char_str">STR</string>
+    <string name="char_con">CON</string>
+    <string name="char_siz">SIZ</string>
+    <string name="char_dex">DEX</string>
+    <string name="char_int">INT</string>
+    <string name="char_ken">KEN</string>
+    <string name="char_cha">CHA</string>
     <string name="error_empty">No elements</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="attr_action_points">Action Points</string>
+    <string name="attr_damage_mod">Damage Modifier</string>
+    <string name="attr_exp_mod">Experience Modifier</string>
+    <string name="attr_healing_rate">Healing Rate</string>
+    <string name="attr_height">Height</string>
+    <string name="attr_weight">Weight</string>
+    <string name="attr_hit_points">Hit Points</string>
+    <string name="attr_luck_points">Luck Points</string>
+    <string name="attr_magic_points">Magic Points</string>
+    <string name="attr_move_rate">Movement Rate</string>
+    <string name="attr_strike_rank">Strike Rank</string>
 
 </resources>

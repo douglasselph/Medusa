@@ -1,8 +1,8 @@
 package com.dugsolutions.playerand.act;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,15 +11,27 @@ import android.widget.FrameLayout;
 
 import com.dugsolutions.playerand.R;
 import com.dugsolutions.playerand.app.MyApplication;
-import com.dugsolutions.playerand.data.RacePlayer;
 
 import android.support.v4.app.FragmentActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import timber.log.Timber;
 
-public class GenActivity extends FragmentActivity implements GenRaceFragment.OnFragmentInteractionListener {
+public class GenActivity extends FragmentActivity implements GenCharsFragment.OnFragmentInteractionListener {
+
+    enum Stage {
+        CHARS,
+        STATS;
+
+        static Stage from(int ord) {
+            for (Stage s : values()) {
+                if (s.ordinal() == ord) {
+                    return s;
+                }
+            }
+            return CHARS;
+        }
+    }
 
     @BindView(R.id.next)               Button      mNext;
     @BindView(R.id.prev)               Button      mPrev;
@@ -29,8 +41,10 @@ public class GenActivity extends FragmentActivity implements GenRaceFragment.OnF
 //    @BindView(R.id.main_list)       RecyclerView mMainList;
 //    SimpleListAdapter mSimpleAdapter;
 
-    MyApplication   mApp;
-    GenRaceFragment mGenRaceFragment;
+    MyApplication    mApp;
+    GenCharsFragment mGenRaceFragment;
+    StatsFragment    mStatsFragment;
+    Stage mCurStage = Stage.CHARS;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +56,9 @@ public class GenActivity extends FragmentActivity implements GenRaceFragment.OnF
         ButterKnife.bind(this);
 
         if (savedInstanceState == null) {
-            mGenRaceFragment = new GenRaceFragment();
+            mGenRaceFragment = new GenCharsFragment();
+            mStatsFragment = new StatsFragment();
+
             getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, mGenRaceFragment).commit();
         }
 //        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -58,23 +74,72 @@ public class GenActivity extends FragmentActivity implements GenRaceFragment.OnF
         mRoll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mGenRaceFragment.roll();
-
+                btnMiddle();
             }
         });
+        mPrev.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btnPrev();
+            }
+        });
+        mNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btnNext();
+            }
+        });
+        mPrev.setEnabled(false);
+    }
 
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
+    void btnPrev() {
+        if (mCurStage.ordinal() > Stage.CHARS.ordinal()) {
+            mCurStage = Stage.from(mCurStage.ordinal() - 1);
+            initStage();
+        }
+    }
 
+    void btnNext() {
+        if (mCurStage.ordinal() < Stage.STATS.ordinal()) {
+            mCurStage = Stage.from(mCurStage.ordinal() + 1);
+            initStage();
+        }
+    }
 
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
+    void initButtons() {
+        if (mCurStage.ordinal() > Stage.CHARS.ordinal()) {
+            mPrev.setEnabled(true);
+        } else {
+            mPrev.setEnabled(false);
+        }
+        if (mCurStage.ordinal() < Stage.STATS.ordinal()) {
+            mNext.setEnabled(true);
+        } else {
+            mNext.setEnabled(false);
+        }
+    }
+
+    void initStage() {
+        Fragment fragment = null;
+        switch (mCurStage) {
+            case CHARS:
+                fragment = mGenRaceFragment;
+                break;
+            case STATS:
+                fragment = mStatsFragment;
+                break;
+        }
+        if (fragment != null) {
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.fragment_container, fragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
+        }
+        initButtons();
+    }
+
+    void btnMiddle() {
+        mGenRaceFragment.roll();
     }
 
     @Override

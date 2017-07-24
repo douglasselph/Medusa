@@ -21,6 +21,15 @@ public class Player extends Creature {
         super(race);
     }
 
+    public void calcHeightAndWeightIfNeeded() {
+        if (height == 0) {
+            height = (short) getHeightRange().roll();
+        }
+        if (weight == 0) {
+            weight = (short) getWeightRange(WeightCategory.Medium).roll();
+        }
+    }
+
     public int getExperienceMod() {
         int value = (int) Math.ceil(cha / 6) - 2;
         if (value < -1) {
@@ -52,5 +61,17 @@ public class Player extends Creature {
         return race.strikeRank;
     }
 
+    public String getHeightStr() {
+        StringBuilder sbuf = new StringBuilder();
+        sbuf.append(height);
+        sbuf.append(" cm");
+        return sbuf.toString();
+    }
 
+    public String getWeightStr() {
+        StringBuilder sbuf = new StringBuilder();
+        sbuf.append(weight);
+        sbuf.append(" Kg");
+        return sbuf.toString();
+    }
 }

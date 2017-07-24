@@ -25,4 +25,15 @@ public class RollGroup {
         }
         return total;
     }
+
+    public String toString() {
+        StringBuilder sbuf = new StringBuilder();
+        for (Roll roll : group) {
+            if (sbuf.length() > 0) {
+                sbuf.append("+");
+            }
+            sbuf.append(roll.toString());
+        }
+        return sbuf.toString();
+    }
 }

@@ -65,4 +65,16 @@
     <style name="ListSubText">
         <item name="android:textSize">18sp</item>
     </style>
+    <style name="StatItemLabel">
+        <item name="android:layout_marginRight">@dimen/stat_item_margin_right</item>
+        <item name="android:layout_marginTop">@dimen/stat_item_margin_top</item>
+        <item name="android:layout_gravity">right</item>
+        <item name="android:textSize">17sp</item>
+    </style>
+    <style name="StatItemValue">
+        <item name="android:layout_marginTop">@dimen/stat_item_margin_top</item>
+        <item name="android:ems">@integer/stat_value_ems</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">17sp</item>
+    </style>
 </resources>

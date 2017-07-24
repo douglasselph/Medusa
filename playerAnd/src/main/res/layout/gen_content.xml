@@ -63,7 +63,7 @@
                  android:layout_centerHorizontal="true"
                  android:layout_above="@id/buttons"
                  android:layout_marginTop="10dp"
-                 tools:context=".act.GenRaceFragment">
+                 tools:context=".act.GenCharsFragment">
     </FrameLayout>
 
     <!--<FrameLayout-->

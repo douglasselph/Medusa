@@ -1,7 +1,6 @@
 package com.dugsolutions.playerand.act;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -25,7 +24,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class GenRaceFragment extends Fragment {
+public class GenCharsFragment extends Fragment {
 
     public interface OnFragmentInteractionListener {
         void onTargetReached();
@@ -70,7 +69,7 @@ public class GenRaceFragment extends Fragment {
     RacePlayer       mRacePlayer;
     List<RacePlayer> mRacePlayers;
 
-    public GenRaceFragment() {
+    public GenCharsFragment() {
     }
 
     /**
@@ -79,11 +78,11 @@ public class GenRaceFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment GenRaceFragment.
+     * @return A new instance of fragment GenCharsFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static GenRaceFragment newInstance(String param1, String param2) {
-        GenRaceFragment fragment = new GenRaceFragment();
+    public static GenCharsFragment newInstance(String param1, String param2) {
+        GenCharsFragment fragment = new GenCharsFragment();
 //        Bundle          args     = new Bundle();
 //        args.putString(ARG_PARAM1, param1);
 //        args.putString(ARG_PARAM2, param2);
@@ -175,7 +174,6 @@ public class GenRaceFragment extends Fragment {
                 setTotalPoints();
             }
         });
-        initStats();
 
         return view;
     }
@@ -189,6 +187,12 @@ public class GenRaceFragment extends Fragment {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        initStats();
     }
 
     @Override

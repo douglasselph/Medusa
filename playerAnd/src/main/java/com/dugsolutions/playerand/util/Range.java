@@ -12,4 +12,9 @@ public class Range {
         this.min = (short) min;
         this.max = (short) max;
     }
+
+    public int roll() {
+        int num = max - min + 1;
+        return Roll.getRandom().nextInt(num) + min;
+    }
 }

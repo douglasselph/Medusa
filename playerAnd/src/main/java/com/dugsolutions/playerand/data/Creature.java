@@ -45,14 +45,22 @@ public class Creature {
         cha = race.cha.roll();
     }
 
-    int getActionPoints() {
+    public int getActionPoints() {
         if (actionPoints == 0) {
             actionPoints = (short) Math.ceil(((float) (ins + dex)) / 12f);
         }
         return actionPoints;
     }
 
-    RollGroup getDamagerModifier() {
+    public int getInitialHitPoints() {
+        return con + siz;
+    }
+
+    public int getMoveRate() {
+        return 6;
+    }
+
+    public RollGroup getDamagerModifier() {
         if (damageModifer == null) {
             short value = (short) Math.floor((float) ((str + siz) - 21) / 5f * 2);
             if (value > 12) {
@@ -62,6 +70,10 @@ public class Creature {
             }
         }
         return damageModifer;
+    }
+
+    public int getStrikeRank() {
+        return (ins + dex) / 2;
     }
 
     public int getTotalPoints() {

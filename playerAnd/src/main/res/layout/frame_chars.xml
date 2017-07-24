@@ -42,7 +42,7 @@
             android:layout_width="@dimen/attr_label_width"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/attr_margin_right"
-            android:text="@string/attr_str"
+            android:text="@string/char_str"
             app:layout_constraintBottom_toBottomOf="@id/str_value"
             app:layout_constraintRight_toLeftOf="@id/str_value"
             app:layout_constraintTop_toTopOf="@id/str_value"/>
@@ -65,7 +65,7 @@
             android:layout_width="@dimen/attr_label_width"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/attr_margin_right"
-            android:text="@string/attr_con"
+            android:text="@string/char_con"
             app:layout_constraintBottom_toBottomOf="@id/con_value"
             app:layout_constraintRight_toLeftOf="@id/con_value"
             app:layout_constraintTop_toTopOf="@id/con_value"/>
@@ -99,7 +99,7 @@
             android:layout_width="@dimen/attr_label_width"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/attr_margin_right"
-            android:text="@string/attr_siz"
+            android:text="@string/char_siz"
             app:layout_constraintBottom_toBottomOf="@id/siz_value"
             app:layout_constraintRight_toLeftOf="@id/siz_value"
             app:layout_constraintTop_toTopOf="@id/siz_value"/>
@@ -133,7 +133,7 @@
             android:layout_width="@dimen/attr_label_width"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/attr_margin_right"
-            android:text="@string/attr_dex"
+            android:text="@string/char_dex"
             app:layout_constraintBottom_toBottomOf="@id/dex_value"
             app:layout_constraintRight_toLeftOf="@id/dex_value"
             app:layout_constraintTop_toTopOf="@id/dex_value"/>
@@ -167,7 +167,7 @@
             android:layout_width="@dimen/attr_label_width"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/attr_margin_right"
-            android:text="@string/attr_int"
+            android:text="@string/char_int"
             app:layout_constraintBottom_toBottomOf="@id/int_value"
             app:layout_constraintRight_toLeftOf="@id/int_value"
             app:layout_constraintTop_toTopOf="@id/int_value"/>
@@ -201,7 +201,7 @@
             android:layout_width="@dimen/attr_label_width"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/attr_margin_right"
-            android:text="@string/attr_ken"
+            android:text="@string/char_ken"
             app:layout_constraintBottom_toBottomOf="@id/ken_value"
             app:layout_constraintRight_toLeftOf="@id/ken_value"
             app:layout_constraintTop_toTopOf="@id/ken_value"/>
@@ -235,7 +235,7 @@
             android:layout_width="@dimen/attr_label_width"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/attr_margin_right"
-            android:text="@string/attr_cha"
+            android:text="@string/char_cha"
             app:layout_constraintBottom_toBottomOf="@id/cha_value"
             app:layout_constraintRight_toLeftOf="@id/cha_value"
             app:layout_constraintTop_toTopOf="@id/cha_value"/>
