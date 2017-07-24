@@ -51,4 +51,6 @@ public class Player extends Creature {
         }
         return race.strikeRank;
     }
+
+
 }

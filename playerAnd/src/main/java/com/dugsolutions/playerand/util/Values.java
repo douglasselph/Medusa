@@ -54,5 +54,31 @@ public class Values {
     public int getLuckPoints(int pow) {
         return (int) Math.ceil(pow / 6);
     }
+
+    public int getMinValue(Short ... values) {
+        if (values.length <= 0) {
+            return 0;
+        }
+        int minValue = values[0];
+        for (int i = 1; i < values.length; i++) {
+            if (values[i] < minValue) {
+                minValue = values[i];
+            }
+        }
+        return minValue;
+    }
+
+    public int getMaxValue(Short ... values) {
+        if (values.length <= 0) {
+            return 0;
+        }
+        int maxValue = values[0];
+        for (int i = 1; i < values.length; i++) {
+            if (values[i] > maxValue) {
+                maxValue = values[i];
+            }
+        }
+        return maxValue;
+    }
 }
 

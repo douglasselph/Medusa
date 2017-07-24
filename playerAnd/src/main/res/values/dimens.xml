@@ -11,6 +11,7 @@
     <dimen name="details_attr_gap">5dp</dimen>
     <dimen name="details_attr_v_spacing">10dp</dimen>
     <dimen name="arrow_size">40dp</dimen>
-    <dimen name="race_label_width">100dp</dimen>
+    <dimen name="race_label_width">120dp</dimen>
+    <integer name="attr_target_points">90</integer>
 
 </resources>

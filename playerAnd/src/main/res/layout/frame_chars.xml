@@ -7,26 +7,28 @@
     android:layout_height="wrap_content">
 
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/interior_chars"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent">
 
-        <TextView android:id="@+id/str_help"
-                  style="@style/AttrHelp"
-                  android:layout_marginTop="@dimen/attr_margin_top_adjust"
-                  android:layout_width="@dimen/attr_help_width"
-                  android:layout_height="wrap_content"
-                  android:text="3d6"
-                  app:layout_constraintTop_toTopOf="parent"
-                  app:layout_constraintRight_toRightOf="parent"/>
+        <TextView
+            android:id="@+id/str_help"
+            style="@style/AttrHelp"
+            android:layout_width="@dimen/attr_help_width"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/attr_margin_top_adjust"
+            android:text="3d6"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <com.travijuu.numberpicker.library.NumberPicker
             android:id="@+id/str_value"
             android:layout_width="@dimen/attr_value_width"
             android:layout_height="@dimen/attr_value_height"
-            android:layout_marginTop="@dimen/attr_margin_top_spacing"
             android:layout_marginRight="@dimen/attr_margin_right"
+            android:layout_marginTop="@dimen/attr_margin_top_spacing"
             app:layout_constraintRight_toLeftOf="@id/str_help"
             app:layout_constraintTop_toTopOf="parent"
             numberpicker:max="18"
@@ -41,9 +43,9 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/attr_margin_right"
             android:text="@string/attr_str"
+            app:layout_constraintBottom_toBottomOf="@id/str_value"
             app:layout_constraintRight_toLeftOf="@id/str_value"
-            app:layout_constraintTop_toTopOf="@id/str_value"
-            app:layout_constraintBottom_toBottomOf="@id/str_value"/>
+            app:layout_constraintTop_toTopOf="@id/str_value"/>
 
         <com.travijuu.numberpicker.library.NumberPicker
             android:id="@+id/con_value"
@@ -64,19 +66,20 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/attr_margin_right"
             android:text="@string/attr_con"
-            app:layout_constraintRight_toLeftOf="@id/con_value"
             app:layout_constraintBottom_toBottomOf="@id/con_value"
+            app:layout_constraintRight_toLeftOf="@id/con_value"
             app:layout_constraintTop_toTopOf="@id/con_value"/>
 
-        <TextView android:id="@+id/con_help"
-                  style="@style/AttrHelp"
-                  android:layout_width="@dimen/attr_help_width"
-                  android:layout_height="wrap_content"
-                  android:text="3d6"
-                  android:layout_marginLeft="@dimen/attr_margin_right"
-                  app:layout_constraintLeft_toRightOf="@id/con_value"
-                  app:layout_constraintTop_toTopOf="@id/con_value"
-                  app:layout_constraintBottom_toBottomOf="@id/con_value"/>
+        <TextView
+            android:id="@+id/con_help"
+            style="@style/AttrHelp"
+            android:layout_width="@dimen/attr_help_width"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/attr_margin_right"
+            android:text="3d6"
+            app:layout_constraintBottom_toBottomOf="@id/con_value"
+            app:layout_constraintLeft_toRightOf="@id/con_value"
+            app:layout_constraintTop_toTopOf="@id/con_value"/>
 
         <com.travijuu.numberpicker.library.NumberPicker
             android:id="@+id/siz_value"
@@ -101,15 +104,16 @@
             app:layout_constraintRight_toLeftOf="@id/siz_value"
             app:layout_constraintTop_toTopOf="@id/siz_value"/>
 
-        <TextView android:id="@+id/siz_help"
-                  style="@style/AttrHelp"
-                  android:layout_width="@dimen/attr_help_width"
-                  android:layout_height="wrap_content"
-                  android:text="3d6"
-                  android:layout_marginLeft="@dimen/attr_margin_right"
-                  app:layout_constraintLeft_toRightOf="@id/siz_value"
-                  app:layout_constraintTop_toTopOf="@id/siz_value"
-                  app:layout_constraintBottom_toBottomOf="@id/siz_value"/>
+        <TextView
+            android:id="@+id/siz_help"
+            style="@style/AttrHelp"
+            android:layout_width="@dimen/attr_help_width"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/attr_margin_right"
+            android:text="3d6"
+            app:layout_constraintBottom_toBottomOf="@id/siz_value"
+            app:layout_constraintLeft_toRightOf="@id/siz_value"
+            app:layout_constraintTop_toTopOf="@id/siz_value"/>
 
         <com.travijuu.numberpicker.library.NumberPicker
             android:id="@+id/dex_value"
@@ -134,15 +138,16 @@
             app:layout_constraintRight_toLeftOf="@id/dex_value"
             app:layout_constraintTop_toTopOf="@id/dex_value"/>
 
-        <TextView android:id="@+id/dex_help"
-                  style="@style/AttrHelp"
-                  android:layout_width="@dimen/attr_help_width"
-                  android:layout_height="wrap_content"
-                  android:text="3d6"
-                  android:layout_marginLeft="@dimen/attr_margin_right"
-                  app:layout_constraintLeft_toRightOf="@id/dex_value"
-                  app:layout_constraintTop_toTopOf="@id/dex_value"
-                  app:layout_constraintBottom_toBottomOf="@id/dex_value"/>
+        <TextView
+            android:id="@+id/dex_help"
+            style="@style/AttrHelp"
+            android:layout_width="@dimen/attr_help_width"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/attr_margin_right"
+            android:text="3d6"
+            app:layout_constraintBottom_toBottomOf="@id/dex_value"
+            app:layout_constraintLeft_toRightOf="@id/dex_value"
+            app:layout_constraintTop_toTopOf="@id/dex_value"/>
 
         <com.travijuu.numberpicker.library.NumberPicker
             android:id="@+id/int_value"
@@ -167,15 +172,16 @@
             app:layout_constraintRight_toLeftOf="@id/int_value"
             app:layout_constraintTop_toTopOf="@id/int_value"/>
 
-        <TextView android:id="@+id/int_help"
-                  style="@style/AttrHelp"
-                  android:layout_width="@dimen/attr_help_width"
-                  android:layout_height="wrap_content"
-                  android:text="3d6"
-                  android:layout_marginLeft="@dimen/attr_margin_right"
-                  app:layout_constraintLeft_toRightOf="@id/int_value"
-                  app:layout_constraintTop_toTopOf="@id/int_value"
-                  app:layout_constraintBottom_toBottomOf="@id/int_value"/>
+        <TextView
+            android:id="@+id/int_help"
+            style="@style/AttrHelp"
+            android:layout_width="@dimen/attr_help_width"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/attr_margin_right"
+            android:text="3d6"
+            app:layout_constraintBottom_toBottomOf="@id/int_value"
+            app:layout_constraintLeft_toRightOf="@id/int_value"
+            app:layout_constraintTop_toTopOf="@id/int_value"/>
 
         <com.travijuu.numberpicker.library.NumberPicker
             android:id="@+id/ken_value"
@@ -200,15 +206,16 @@
             app:layout_constraintRight_toLeftOf="@id/ken_value"
             app:layout_constraintTop_toTopOf="@id/ken_value"/>
 
-        <TextView android:id="@+id/ken_help"
-                  style="@style/AttrHelp"
-                  android:layout_width="@dimen/attr_help_width"
-                  android:layout_height="wrap_content"
-                  android:text="3d6"
-                  android:layout_marginLeft="@dimen/attr_margin_right"
-                  app:layout_constraintLeft_toRightOf="@id/ken_value"
-                  app:layout_constraintTop_toTopOf="@id/ken_value"
-                  app:layout_constraintBottom_toBottomOf="@id/ken_value"/>
+        <TextView
+            android:id="@+id/ken_help"
+            style="@style/AttrHelp"
+            android:layout_width="@dimen/attr_help_width"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/attr_margin_right"
+            android:text="3d6"
+            app:layout_constraintBottom_toBottomOf="@id/ken_value"
+            app:layout_constraintLeft_toRightOf="@id/ken_value"
+            app:layout_constraintTop_toTopOf="@id/ken_value"/>
 
         <com.travijuu.numberpicker.library.NumberPicker
             android:id="@+id/cha_value"
@@ -233,16 +240,29 @@
             app:layout_constraintRight_toLeftOf="@id/cha_value"
             app:layout_constraintTop_toTopOf="@id/cha_value"/>
 
-        <TextView android:id="@+id/cha_help"
-                  style="@style/AttrHelp"
-                  android:layout_width="@dimen/attr_help_width"
-                  android:layout_height="wrap_content"
-                  android:text="3d6"
-                  android:layout_marginLeft="@dimen/attr_margin_right"
-                  app:layout_constraintLeft_toRightOf="@id/cha_value"
-                  app:layout_constraintTop_toTopOf="@id/cha_value"
-                  app:layout_constraintBottom_toBottomOf="@id/cha_value"/>
+        <TextView
+            android:id="@+id/cha_help"
+            style="@style/AttrHelp"
+            android:layout_width="@dimen/attr_help_width"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/attr_margin_right"
+            android:text="3d6"
+            app:layout_constraintBottom_toBottomOf="@id/cha_value"
+            app:layout_constraintLeft_toRightOf="@id/cha_value"
+            app:layout_constraintTop_toTopOf="@id/cha_value"/>
 
     </android.support.constraint.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/summary_points"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="10/30"
+        android:textSize="20sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/interior_chars"
+        />
 
 </android.support.constraint.ConstraintLayout>
