@@ -8,7 +8,7 @@ import com.dugsolutions.playerand.data.RaceLocations;
 import com.dugsolutions.playerand.data.RaceLocations.RaceLocation;
 import com.dugsolutions.playerand.R;
 import com.dugsolutions.playerand.data.RacePlayer;
-import com.dugsolutions.playerand.data.Skill;
+import com.dugsolutions.playerand.data.SkillDesc;
 import com.dugsolutions.playerand.util.Roll;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -56,12 +56,12 @@ public class LoadXml {
 
     void load(int fileResId) {
         try {
-            XmlResourceParser parser = ctx.getResources().getXml(fileResId);
-            int eventType;
-            String name;
-            RaceCreature creature = null;
-            RacePlayer player;
-            Skill skill = null;
+            XmlResourceParser parser   = ctx.getResources().getXml(fileResId);
+            int               eventType;
+            String            name;
+            RaceCreature      creature = null;
+            RacePlayer        player;
+            SkillDesc         skill    = null;
 
             while (true) {
                 parser.next();
@@ -154,7 +154,7 @@ public class LoadXml {
                             String attName = parser.getAttributeName(i);
                             if ("name".equals(attName)) {
                                 String value = parser.getAttributeValue(i);
-                                skill = TableSkill.getInstance().query(skill, value);
+                                skill = TableSkillDesc.getInstance().query(skill, value);
                             }
                         }
                         if (skill == null) {
@@ -166,7 +166,7 @@ public class LoadXml {
                                 skill.base = parser.getAttributeValue(i);
                             } else if ("parent".equals(attName)) {
                                 String parentName = parser.getAttributeValue(i);
-                                skill.parent = TableSkill.getInstance().query(parentName);
+                                skill.parent = TableSkillDesc.getInstance().query(parentName);
                             }
                         }
                     }
@@ -176,7 +176,7 @@ public class LoadXml {
                         TableRaceCreatures.getInstance().store(creature);
                         creature = null;
                     } else if ("skill".equals(name)) {
-                        TableSkill.getInstance().store(skill);
+                        TableSkillDesc.getInstance().store(skill);
                         skill = null;
                     } else if ("locations".equals(name)) {
                         creature.locations.sort();

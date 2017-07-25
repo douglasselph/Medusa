@@ -33,6 +33,8 @@ public class DatabaseManager {
                 TableRaceLocations.getInstance().create();
                 TableCreature.getInstance().create();
                 TablePlayer.getInstance().create();
+                TableSkillDesc.getInstance().create();
+                TableSkillRef.getInstance().create();
             } catch (Exception ex) {
                 Timber.e(ex);
             }
@@ -54,6 +56,8 @@ public class DatabaseManager {
             TableRaceLocations.Init(db);
             TableCreature.Init(db);
             TablePlayer.Init(db);
+            TableSkillDesc.Init(db);
+            TableSkillRef.Init(db);
         }
     }
 

@@ -1,8 +1,12 @@
 package com.dugsolutions.playerand.data;
 
+import com.dugsolutions.playerand.db.TableSkillDesc;
+import com.dugsolutions.playerand.util.MathEval;
 import com.dugsolutions.playerand.util.Roll;
 import com.dugsolutions.playerand.util.RollGroup;
 import com.dugsolutions.playerand.util.Values;
+
+import java.util.ArrayList;
 
 import timber.log.Timber;
 
@@ -26,7 +30,7 @@ public class Creature {
     public short        ins;
     public short        pow;
     public short        cha;
-
+    public ArrayList<SkillRef> skills = new ArrayList();
     short     actionPoints; // computed
     RollGroup damageModifer; // computed
 
@@ -112,5 +116,35 @@ public class Creature {
             Timber.e("Could not find anything with value " + target);
             str += amt;
         }
+    }
+
+    public ArrayList<SkillRef> querySkills() {
+        ArrayList<SkillDesc> descList = TableSkillDesc.getInstance().query();
+        ArrayList<SkillRef>  skills   = new ArrayList();
+        for (SkillDesc desc : descList) {
+            skills.add(querySkill(desc));
+        }
+        return skills;
+    }
+
+    public SkillRef querySkill(SkillDesc desc) {
+        for (SkillRef skill : skills) {
+            if (skill.skill_desc_id == desc.id) {
+                return skill;
+            }
+        }
+        SkillRef skill = new SkillRef();
+        skill.skill_desc_id = desc.id;
+        MathEval eval = Values.getInstance().getMath();
+        eval.clear();
+        eval.setConstant("STR", str);
+        eval.setConstant("CON", con);
+        eval.setConstant("SIZ", siz);
+        eval.setConstant("DEX", dex);
+        eval.setConstant("INT", ins);
+        eval.setConstant("CHA", cha);
+        eval.setConstant("POW", pow);
+        skill.value = (short) eval.evaluate(desc.base);
+        return skill;
     }
 }

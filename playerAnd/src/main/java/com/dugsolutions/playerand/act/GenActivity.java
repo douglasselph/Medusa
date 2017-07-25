@@ -37,9 +37,6 @@ public class GenActivity extends FragmentActivity implements GenCharsFragment.On
     @BindView(R.id.prev)               Button      mPrev;
     @BindView(R.id.roll)               Button      mRoll;
     @BindView(R.id.fragment_container) FrameLayout mFragmentContainer;
-//    @BindView(R.id.main_list_frame) FrameLayout  mMainListFrame;
-//    @BindView(R.id.main_list)       RecyclerView mMainList;
-//    SimpleListAdapter mSimpleAdapter;
 
     MyApplication    mApp;
     GenCharsFragment mGenRaceFragment;
@@ -58,19 +55,8 @@ public class GenActivity extends FragmentActivity implements GenCharsFragment.On
         if (savedInstanceState == null) {
             mGenRaceFragment = new GenCharsFragment();
             mStatsFragment = new StatsFragment();
-
             getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, mGenRaceFragment).commit();
         }
-//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-//        mMainList.setLayoutManager(linearLayoutManager);
-//        DividerItemDecoration divider = new DividerItemDecoration(mMainList.getContext(), linearLayoutManager.getOrientation());
-//        mMainList.addItemDecoration(divider);
-//        mSimpleAdapter = new SimpleListAdapter(this, new SimpleListAdapter.OnItemSelectedListener() {
-//            @Override
-//            public void onSelectedItem(RacePlayer race) {
-//                onSelected(race);
-//            }
-//        });
         mRoll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

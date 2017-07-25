@@ -4,8 +4,9 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.dugsolutions.playerand.data.RaceCreature;
-import com.dugsolutions.playerand.data.Skill;
+import com.dugsolutions.playerand.data.SkillDesc;
+
+import java.util.ArrayList;
 
 import timber.log.Timber;
 
@@ -13,9 +14,9 @@ import timber.log.Timber;
  * Created by dug on 7/14/17.
  */
 
-public class TableSkill {
+public class TableSkillDesc {
 
-    static final String TABLE_NAME = "skills";
+    static final String TABLE_NAME = "skills_desc";
 
     static final String KEY_ROWID           = "_id";
     static final String KEY_NAME            = "name";
@@ -24,19 +25,19 @@ public class TableSkill {
     static final String KEY_IS_PROFESSIONAL = "is_professional";
     static final String KEY_PARENT_ID       = "parent_id";
 
-    static TableSkill sInstance;
+    static TableSkillDesc sInstance;
 
     static void Init(SQLiteDatabase db) {
-        sInstance = new TableSkill(db);
+        sInstance = new TableSkillDesc(db);
     }
 
-    public static TableSkill getInstance() {
+    public static TableSkillDesc getInstance() {
         return sInstance;
     }
 
     final SQLiteDatabase mDb;
 
-    TableSkill(SQLiteDatabase db) {
+    TableSkillDesc(SQLiteDatabase db) {
         mDb = db;
     }
 
@@ -60,7 +61,7 @@ public class TableSkill {
         mDb.execSQL(sbuf.toString());
     }
 
-    public void store(Skill skill) {
+    public void store(SkillDesc skill) {
         mDb.beginTransaction();
         try {
             ContentValues values = new ContentValues();
@@ -80,7 +81,7 @@ public class TableSkill {
         }
     }
 
-    void fill(ContentValues values, Skill skill) {
+    void fill(ContentValues values, SkillDesc skill) {
         values.put(KEY_NAME, skill.name);
         values.put(KEY_DESC, skill.desc);
         values.put(KEY_BASE, skill.base);
@@ -90,13 +91,13 @@ public class TableSkill {
         }
     }
 
-    public Skill query(String name) {
+    public SkillDesc query(String name) {
         return query(null, name);
     }
 
-    public Skill query(Skill skill, String name) {
+    public SkillDesc query(SkillDesc skill, String name) {
         if (skill == null) {
-            skill = new Skill();
+            skill = new SkillDesc();
         }
         String selection = KEY_NAME + "=?";
         String[] selectionArgs = {name};
@@ -114,11 +115,11 @@ public class TableSkill {
         return skill;
     }
 
-    public Skill query(long id) {
-        Skill skill = new Skill();
-        String selection = KEY_ROWID + "=?";
-        String[] selectionArgs = {Long.toString(id)};
-        Cursor cursor = mDb.query(TABLE_NAME, null, selection, selectionArgs, null, null, null, null);
+    public SkillDesc query(long id) {
+        SkillDesc skill         = new SkillDesc();
+        String    selection     = KEY_ROWID + "=?";
+        String[]  selectionArgs = {Long.toString(id)};
+        Cursor    cursor        = mDb.query(TABLE_NAME, null, selection, selectionArgs, null, null, null, null);
         if (cursor.getCount() >= 1) {
             if (cursor.moveToFirst()) {
                 skill.id = id;
@@ -129,7 +130,18 @@ public class TableSkill {
         return skill;
     }
 
-    void fill(Cursor cursor, Skill skill) {
+    public ArrayList<SkillDesc> query() {
+        ArrayList<SkillDesc> result = new ArrayList();
+        Cursor               cursor = mDb.query(TABLE_NAME, null, null, null, null, null, null, null);
+        while (cursor.moveToNext()) {
+            SkillDesc skill = new SkillDesc();
+            fill(cursor, skill);
+            result.add(skill);
+        }
+        return result;
+    }
+
+    void fill(Cursor cursor, SkillDesc skill) {
         final int idxRowId = cursor.getColumnIndex(KEY_ROWID);
         final int idxName = cursor.getColumnIndex(KEY_NAME);
         final int idxDesc = cursor.getColumnIndex(KEY_DESC);
