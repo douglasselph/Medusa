@@ -135,16 +135,24 @@ public class Creature {
         }
         SkillRef skill = new SkillRef();
         skill.skill_desc_id = desc.id;
-        MathEval eval = Values.getInstance().getMath();
-        eval.clear();
-        eval.setConstant("STR", str);
-        eval.setConstant("CON", con);
-        eval.setConstant("SIZ", siz);
-        eval.setConstant("DEX", dex);
-        eval.setConstant("INT", ins);
-        eval.setConstant("CHA", cha);
-        eval.setConstant("POW", pow);
-        skill.value = (short) eval.evaluate(desc.base);
+        String base = desc.base;
+        if (base == null && desc.parent != null) {
+            base = desc.parent.base;
+        }
+        if (base != null) {
+            MathEval eval = new MathEval();
+            eval.setConstant("STR", str);
+            eval.setConstant("CON", con);
+            eval.setConstant("SIZ", siz);
+            eval.setConstant("DEX", dex);
+            eval.setConstant("INT", ins);
+            eval.setConstant("CHA", cha);
+            eval.setConstant("POW", pow);
+            eval.setConstant("KEN", pow);
+            skill.value = (short) eval.evaluate(base);
+        } else {
+            Timber.e("Unexpected NULL base for skill " + desc.name);
+        }
         return skill;
     }
 }

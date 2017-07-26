@@ -11,8 +11,6 @@ import android.view.ViewGroup;
 
 import com.dugsolutions.playerand.R;
 import com.dugsolutions.playerand.app.MyApplication;
-import com.dugsolutions.playerand.data.Player;
-import com.dugsolutions.playerand.data.RacePlayer;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -26,16 +24,16 @@ import butterknife.ButterKnife;
 public class SkillsFragment extends Fragment {
 
     @BindView(R.id.main_list) RecyclerView mMainList;
-    SkillsListAdapter mSimpleAdapter;
+
+    SkillsListAdapter mAdapter;
 
     MyApplication mApp;
 
     public SkillsFragment() {
     }
 
-    public static SkillsFragment newInstance(String param1, String param2) {
+    public static SkillsFragment newInstance() {
         SkillsFragment fragment = new SkillsFragment();
-
         return fragment;
     }
 
@@ -47,7 +45,7 @@ public class SkillsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.stats_fragment, container, false);
+        View view = inflater.inflate(R.layout.skills_fragment, container, false);
 
         mApp = (MyApplication) getActivity().getApplicationContext();
 
@@ -57,13 +55,16 @@ public class SkillsFragment extends Fragment {
         mMainList.setLayoutManager(linearLayoutManager);
         DividerItemDecoration divider = new DividerItemDecoration(mMainList.getContext(), linearLayoutManager.getOrientation());
         mMainList.addItemDecoration(divider);
-        mSimpleAdapter = new SkillsListAdapter(getContext());
+        mAdapter = new SkillsListAdapter(getContext());
+        mMainList.setAdapter(mAdapter);
+
         return view;
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        mAdapter.refresh();
     }
 
 }

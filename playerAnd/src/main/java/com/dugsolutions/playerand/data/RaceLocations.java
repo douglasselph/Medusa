@@ -65,8 +65,7 @@ public class RaceLocations {
     }
 
     public Locations getLocations(int con, int siz) {
-        MathEval eval = Values.getInstance().getMath();
-        eval.clear();
+        MathEval eval = new MathEval();
         eval.setConstant("SIZ", siz);
         eval.setConstant("CON", con);
         double base = eval.evaluate(baseExpr);

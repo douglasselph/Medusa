@@ -57,7 +57,7 @@ public class TableCreature {
     }
 
     protected void create(StringBuilder sbuf) {
-        sbuf.append("create table ");
+        sbuf.append("create table if not exists ");
         sbuf.append(getTableName());
         sbuf.append(" (");
         sbuf.append(KEY_ROWID);
@@ -88,7 +88,7 @@ public class TableCreature {
             ContentValues values = new ContentValues();
             fill(values, creature);
             if (creature.id > 0) {
-                String where = KEY_ROWID + "=?";
+                String   where     = KEY_ROWID + "=?";
                 String[] whereArgs = {Long.toString(creature.id)};
                 mDb.update(getTableName(), values, where, whereArgs);
             } else {
@@ -115,10 +115,10 @@ public class TableCreature {
     }
 
     public Creature query(String name) {
-        String selection = KEY_NAME + "=?";
+        String   selection     = KEY_NAME + "=?";
         String[] selectionArgs = {name};
-        Cursor cursor = mDb.query(getTableName(), null, selection, selectionArgs, null, null, null, null);
-        Creature creature = null;
+        Cursor   cursor        = mDb.query(getTableName(), null, selection, selectionArgs, null, null, null, null);
+        Creature creature      = null;
         if (cursor.getCount() > 0) {
             if (cursor.getCount() > 1) {
                 Timber.e("Found too many creatures named: " + name);
@@ -129,6 +129,9 @@ public class TableCreature {
             }
         }
         cursor.close();
+        if (creature != null) {
+            TableSkillRef.getInstance().query(creature);
+        }
         return creature;
     }
 
@@ -137,19 +140,19 @@ public class TableCreature {
     }
 
     protected Creature fill(Cursor cursor) {
-        final int idxRowId = cursor.getColumnIndex(KEY_ROWID);
-        final int idxName = cursor.getColumnIndex(KEY_NAME);
-        final int idxStr = cursor.getColumnIndex(KEY_STR);
-        final int idxCon = cursor.getColumnIndex(KEY_CON);
-        final int idxSiz = cursor.getColumnIndex(KEY_SIZ);
-        final int idxDex = cursor.getColumnIndex(KEY_DEX);
-        final int idxInt = cursor.getColumnIndex(KEY_INT);
-        final int idxPow = cursor.getColumnIndex(KEY_POW);
-        final int idxCha = cursor.getColumnIndex(KEY_CHA);
-        final int idxRace = cursor.getColumnIndex(KEY_RACE_ID);
-        long raceId = cursor.getLong(idxRace);
-        RaceCreature race = TableRaceCreatures.getInstance().query(raceId);
-        Creature creature = create(race);
+        final int    idxRowId = cursor.getColumnIndex(KEY_ROWID);
+        final int    idxName  = cursor.getColumnIndex(KEY_NAME);
+        final int    idxStr   = cursor.getColumnIndex(KEY_STR);
+        final int    idxCon   = cursor.getColumnIndex(KEY_CON);
+        final int    idxSiz   = cursor.getColumnIndex(KEY_SIZ);
+        final int    idxDex   = cursor.getColumnIndex(KEY_DEX);
+        final int    idxInt   = cursor.getColumnIndex(KEY_INT);
+        final int    idxPow   = cursor.getColumnIndex(KEY_POW);
+        final int    idxCha   = cursor.getColumnIndex(KEY_CHA);
+        final int    idxRace  = cursor.getColumnIndex(KEY_RACE_ID);
+        long         raceId   = cursor.getLong(idxRace);
+        RaceCreature race     = TableRaceCreatures.getInstance().query(raceId);
+        Creature     creature = create(race);
         creature.id = cursor.getLong(idxRowId);
         creature.name = cursor.getString(idxName);
         creature.str = cursor.getShort(idxStr);

@@ -42,7 +42,7 @@ public class TableRaceLocations {
 
     public void create() {
         StringBuilder sbuf = new StringBuilder();
-        sbuf.append("create table ");
+        sbuf.append("create table if not exists ");
         sbuf.append(TABLE_NAME);
         sbuf.append(" (");
         sbuf.append(KEY_ROWID);

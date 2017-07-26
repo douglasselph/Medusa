@@ -21,7 +21,9 @@ public class GenActivity extends FragmentActivity implements GenCharsFragment.On
 
     enum Stage {
         CHARS,
-        STATS;
+        STATS,
+        SKILLS,
+        END;
 
         static Stage from(int ord) {
             for (Stage s : values()) {
@@ -41,6 +43,7 @@ public class GenActivity extends FragmentActivity implements GenCharsFragment.On
     MyApplication    mApp;
     GenCharsFragment mGenRaceFragment;
     StatsFragment    mStatsFragment;
+    SkillsFragment   mSkillsFragment;
     Stage mCurStage = Stage.CHARS;
 
     @Override
@@ -53,8 +56,9 @@ public class GenActivity extends FragmentActivity implements GenCharsFragment.On
         ButterKnife.bind(this);
 
         if (savedInstanceState == null) {
-            mGenRaceFragment = new GenCharsFragment();
-            mStatsFragment = new StatsFragment();
+            mGenRaceFragment = GenCharsFragment.newInstance();
+            mStatsFragment = StatsFragment.newInstance();
+            mSkillsFragment = SkillsFragment.newInstance();
             getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, mGenRaceFragment).commit();
         }
         mRoll.setOnClickListener(new View.OnClickListener() {
@@ -86,7 +90,7 @@ public class GenActivity extends FragmentActivity implements GenCharsFragment.On
     }
 
     void btnNext() {
-        if (mCurStage.ordinal() < Stage.STATS.ordinal()) {
+        if (mCurStage.ordinal() < Stage.END.ordinal() - 1) {
             mCurStage = Stage.from(mCurStage.ordinal() + 1);
             initStage();
         }
@@ -98,10 +102,15 @@ public class GenActivity extends FragmentActivity implements GenCharsFragment.On
         } else {
             mPrev.setEnabled(false);
         }
-        if (mCurStage.ordinal() < Stage.STATS.ordinal()) {
+        if (mCurStage.ordinal() < Stage.END.ordinal() - 1) {
             mNext.setEnabled(true);
         } else {
             mNext.setEnabled(false);
+        }
+        if (mCurStage == Stage.CHARS) {
+            mRoll.setVisibility(View.VISIBLE);
+        } else {
+            mRoll.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -113,6 +122,9 @@ public class GenActivity extends FragmentActivity implements GenCharsFragment.On
                 break;
             case STATS:
                 fragment = mStatsFragment;
+                break;
+            case SKILLS:
+                fragment = mSkillsFragment;
                 break;
         }
         if (fragment != null) {

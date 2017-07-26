@@ -72,16 +72,7 @@ public class GenCharsFragment extends Fragment {
     public GenCharsFragment() {
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment GenCharsFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static GenCharsFragment newInstance(String param1, String param2) {
+    public static GenCharsFragment newInstance() {
         GenCharsFragment fragment = new GenCharsFragment();
 //        Bundle          args     = new Bundle();
 //        args.putString(ARG_PARAM1, param1);

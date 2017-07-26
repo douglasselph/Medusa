@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.dugsolutions.playerand.data.SkillDesc;
+import com.dugsolutions.playerand.util.StringUtils;
 
 import java.util.ArrayList;
 
@@ -43,7 +44,7 @@ public class TableSkillDesc {
 
     public void create() {
         StringBuilder sbuf = new StringBuilder();
-        sbuf.append("create table ");
+        sbuf.append("create table  if not exists ");
         sbuf.append(TABLE_NAME);
         sbuf.append(" (");
         sbuf.append(KEY_ROWID);
@@ -82,7 +83,7 @@ public class TableSkillDesc {
     }
 
     void fill(ContentValues values, SkillDesc skill) {
-        values.put(KEY_NAME, skill.name);
+        values.put(KEY_NAME, StringUtils.capitalize(skill.name));
         values.put(KEY_DESC, skill.desc);
         values.put(KEY_BASE, skill.base);
         values.put(KEY_IS_PROFESSIONAL, skill.isProfessional ? 1 : 0);
@@ -98,13 +99,13 @@ public class TableSkillDesc {
     public SkillDesc query(SkillDesc skill, String name) {
         if (skill == null) {
             skill = new SkillDesc();
+            skill.name = name;
         }
         String selection = KEY_NAME + "=?";
-        String[] selectionArgs = {name};
+        String[] selectionArgs = {StringUtils.capitalize(name)};
         Cursor cursor = mDb.query(TABLE_NAME, null, selection, selectionArgs, null, null, null, null);
         if (cursor.getCount() >= 1) {
             if (cursor.moveToFirst()) {
-                skill.name = name;
                 fill(cursor, skill);
             }
             if (cursor.getCount() > 1) {

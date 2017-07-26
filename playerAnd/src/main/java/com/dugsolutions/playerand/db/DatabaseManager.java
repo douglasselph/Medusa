@@ -28,16 +28,6 @@ public class DatabaseManager {
         @Override
         public void onCreate(SQLiteDatabase db) {
             init(db);
-            try {
-                TableRaceCreatures.getInstance().create();
-                TableRaceLocations.getInstance().create();
-                TableCreature.getInstance().create();
-                TablePlayer.getInstance().create();
-                TableSkillDesc.getInstance().create();
-                TableSkillRef.getInstance().create();
-            } catch (Exception ex) {
-                Timber.e(ex);
-            }
         }
 
         @Override
@@ -58,6 +48,17 @@ public class DatabaseManager {
             TablePlayer.Init(db);
             TableSkillDesc.Init(db);
             TableSkillRef.Init(db);
+
+            try {
+                TableRaceCreatures.getInstance().create();
+                TableRaceLocations.getInstance().create();
+                TableCreature.getInstance().create();
+                TablePlayer.getInstance().create();
+                TableSkillDesc.getInstance().create();
+                TableSkillRef.getInstance().create();
+            } catch (Exception ex) {
+                Timber.e(ex);
+            }
         }
     }
 
@@ -72,6 +73,10 @@ public class DatabaseManager {
         mDbHelper = new DatabaseHelper(ctx);
         mDb = mDbHelper.getWritableDatabase();
         sInstance = this;
+    }
+
+    public void close() {
+        mDbHelper.close();
     }
 
 }

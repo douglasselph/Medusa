@@ -9,6 +9,7 @@ import com.dugsolutions.playerand.data.RaceLocations.RaceLocation;
 import com.dugsolutions.playerand.R;
 import com.dugsolutions.playerand.data.RacePlayer;
 import com.dugsolutions.playerand.data.SkillDesc;
+import com.dugsolutions.playerand.data.SkillRef;
 import com.dugsolutions.playerand.util.Roll;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -45,23 +46,25 @@ public class LoadXml {
     }
 
     void load() {
-//        load(R.xml.creatures);
+        load(R.xml.skills);
+        load(R.xml.creatures);
         load(R.xml.player);
-//        load(R.xml.combat);
-//        load(R.xml.culture);
-//        load(R.xml.equipment);
-//        load(R.xml.skills);
-//        load(R.xml.spells);
+        load(R.xml.combat);
+        load(R.xml.culture);
+        load(R.xml.equipment);
+        load(R.xml.spells);
     }
 
     void load(int fileResId) {
         try {
-            XmlResourceParser parser   = ctx.getResources().getXml(fileResId);
+            XmlResourceParser parser    = ctx.getResources().getXml(fileResId);
             int               eventType;
             String            name;
-            RaceCreature      creature = null;
+            RaceCreature      creature  = null;
             RacePlayer        player;
-            SkillDesc         skill    = null;
+            SkillDesc         skillDesc = null;
+            SkillRef          skillRef  = null;
+            boolean           skills    = false;
 
             while (true) {
                 parser.next();
@@ -104,7 +107,7 @@ public class LoadXml {
                         for (int i = 0; i < parser.getAttributeCount(); i++) {
                             String attName = parser.getAttributeName(i);
                             if ("creature".equals(attName)) {
-                                String value = parser.getAttributeValue(i);
+                                String       value = parser.getAttributeValue(i);
                                 RaceCreature other = TableRaceCreatures.getInstance().query(value);
                                 player.copy(other);
                             }
@@ -149,41 +152,93 @@ public class LoadXml {
                         }
                         creature.locations.add(location);
                     } else if ("skill".equals(name)) {
-                        skill = null;
-                        for (int i = 0; i < parser.getAttributeCount(); i++) {
-                            String attName = parser.getAttributeName(i);
-                            if ("name".equals(attName)) {
-                                String value = parser.getAttributeValue(i);
-                                skill = TableSkillDesc.getInstance().query(skill, value);
+                        if (skills) {
+                            skillDesc = null;
+                            skillRef = new SkillRef();
+                            for (int i = 0; i < parser.getAttributeCount(); i++) {
+                                String attName = parser.getAttributeName(i);
+                                if ("name".equals(attName)) {
+                                    String value = parser.getAttributeValue(i);
+                                    skillDesc = TableSkillDesc.getInstance().query(value);
+                                    if (skillDesc == null) {
+                                        Timber.e("Can't find skill named " + value);
+                                    } else {
+                                        skillRef.skill_desc_id = skillDesc.id;
+                                    }
+                                }
+                            }
+                            if (skillRef == null || skillRef.skill_desc_id == 0) {
+                                Timber.e("No skill name specified");
+                                skillRef = null;
+                            }
+                        } else {
+                            skillDesc = null;
+                            for (int i = 0; i < parser.getAttributeCount(); i++) {
+                                String attName = parser.getAttributeName(i);
+                                if ("name".equals(attName)) {
+                                    String value = parser.getAttributeValue(i);
+                                    skillDesc = TableSkillDesc.getInstance().query(skillDesc, value);
+                                }
+                            }
+                            if (skillDesc == null) {
+                                Timber.e("Missing skill name");
+                                for (int i = 0; i < parser.getAttributeCount(); i++) {
+                                    Timber.d("ATTRIBUTE=" + parser.getAttributeName(i));
+                                }
+                            } else {
+                                for (int i = 0; i < parser.getAttributeCount(); i++) {
+                                    String attName = parser.getAttributeName(i);
+                                    if ("chars".equals(attName)) {
+                                        skillDesc.base = parser.getAttributeValue(i);
+                                    } else if ("parent".equals(attName)) {
+                                        String parentName = parser.getAttributeValue(i);
+                                        skillDesc.parent = TableSkillDesc.getInstance().query(parentName);
+                                    } else if ("professional".equals(attName)) {
+                                        skillDesc.isProfessional = parser.getAttributeValue(i).equals("true");
+                                    }
+                                }
                             }
                         }
-                        if (skill == null) {
-                            Timber.e("Missing skill name");
-                        }
-                        for (int i = 0; i < parser.getAttributeCount(); i++) {
-                            String attName = parser.getAttributeName(i);
-                            if ("chars".equals(attName)) {
-                                skill.base = parser.getAttributeValue(i);
-                            } else if ("parent".equals(attName)) {
-                                String parentName = parser.getAttributeValue(i);
-                                skill.parent = TableSkillDesc.getInstance().query(parentName);
-                            }
-                        }
+                    } else if ("skills".equals(name)) {
+                        skills = true;
                     }
                 } else if (eventType == XmlPullParser.END_TAG) {
-                    Timber.d("MYDEBUG END TAG " + name);
                     if ("creature".equals(name) || "player".equals(name)) {
                         TableRaceCreatures.getInstance().store(creature);
                         creature = null;
-                    } else if ("skill".equals(name)) {
-                        TableSkillDesc.getInstance().store(skill);
-                        skill = null;
+                    } else if ("skill".equals(name) && (skillDesc != null)) {
+                        if (skillRef != null) {
+                            if (creature == null) {
+                                Timber.e("Skill specified outside of a creature");
+                            } else {
+                                creature.skills.add(skillRef);
+                            }
+                            skillRef = null;
+                        }
+                        if (skillDesc != null) {
+                            if (skillDesc.name == null) {
+                                Timber.e("SKILL had no name");
+                            } else if (skillDesc.base == null && (skillDesc.parent == null || skillDesc.parent.base == null)) {
+                                Timber.e("SKILL had no chars string: " + skillDesc.name);
+                            } else {
+                                TableSkillDesc.getInstance().store(skillDesc);
+                            }
+                            skillDesc = null;
+                        }
                     } else if ("locations".equals(name)) {
                         creature.locations.sort();
+                    } else if ("skills".equals(name)) {
+                        skills = false;
                     }
                 } else if (eventType == XmlPullParser.TEXT) {
-                    if (skill != null) {
-                        skill.desc = parser.getText();
+                    if (skillDesc != null) {
+                        skillDesc.desc = parser.getText();
+                    } else if (skillRef != null) {
+                        try {
+                            skillRef.value = Short.valueOf(parser.getText());
+                        } catch (Exception ex) {
+                            Timber.e(ex);
+                        }
                     }
                 }
             }

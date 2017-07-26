@@ -206,7 +206,7 @@
         chars="DEX+KEN"></skill>
     <skill
         chars="CON*2"
-        nane="Endurance"></skill>
+        name="Endurance"></skill>
     <skill
         name="Evade"
         chars="DEX*2"></skill>
@@ -319,7 +319,6 @@
         name="Disguise"
         chars="INT+CHA"
         professional="true"></skill>
-
     <skill
         name="Engineering"
         chars="INT*2"

@@ -16,11 +16,8 @@ public class Values {
 
     static Values sInstance;
 
-    MathEval mathEval;
-
     private Values() {
         sInstance = this;
-        mathEval = new MathEval();
     }
 
     public Range getWeightRange(WeightCategory cat, int siz) {
@@ -45,10 +42,6 @@ public class Values {
         } else {
             return (siz - 8) * 5 + 155;
         }
-    }
-
-    public MathEval getMath() {
-        return mathEval;
     }
 
     public int getLuckPoints(int pow) {

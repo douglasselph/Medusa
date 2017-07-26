@@ -56,7 +56,7 @@ public class TableRaceCreatures {
 
     public void create() {
         StringBuilder sbuf = new StringBuilder();
-        sbuf.append("create table ");
+        sbuf.append("create table if not exists ");
         sbuf.append(TABLE_NAME);
         sbuf.append(" (");
         sbuf.append(KEY_ROWID);
@@ -93,7 +93,6 @@ public class TableRaceCreatures {
     }
 
     public void store(RaceCreature creature) {
-        Timber.d("MYDBEUG: store(" + creature.name + ", ID=" + creature.id + ")");
         mDb.beginTransaction();
         try {
             ContentValues values = new ContentValues();
@@ -102,17 +101,17 @@ public class TableRaceCreatures {
                 fill(values, (RacePlayer) creature);
             }
             if (creature.id > 0) {
-                String where = KEY_ROWID + "=?";
+                String   where     = KEY_ROWID + "=?";
                 String[] whereArgs = {Long.toString(creature.id)};
                 mDb.update(TABLE_NAME, values, where, whereArgs);
             } else {
-                String where = KEY_NAME + "=?";
+                String   where     = KEY_NAME + "=?";
                 String[] whereArgs = {creature.name};
                 if (mDb.update(TABLE_NAME, values, where, whereArgs) == 0) {
                     creature.id = mDb.insert(TABLE_NAME, null, values);
                 } else {
                     String[] columns = {KEY_ROWID};
-                    Cursor cursor = mDb.query(TABLE_NAME, columns, where, whereArgs, null, null, null, null);
+                    Cursor   cursor  = mDb.query(TABLE_NAME, columns, where, whereArgs, null, null, null, null);
                     if (cursor.getCount() > 0) {
                         creature.id = cursor.getLong(cursor.getColumnIndex(KEY_ROWID));
                         if (cursor.getCount() > 1) {
@@ -129,6 +128,9 @@ public class TableRaceCreatures {
             }
             if (creature.locations != null) {
                 TableRaceLocations.getInstance().store(creature.id, creature.locations);
+            }
+            if (creature.skills.size() > 0) {
+                TableSkillRef.getInstance().store(creature);
             }
             mDb.setTransactionSuccessful();
         } catch (Exception ex) {
@@ -147,7 +149,9 @@ public class TableRaceCreatures {
             values.put(KEY_DEX, creature.dex.toString());
             values.put(KEY_INT, creature.ins.toString());
             values.put(KEY_POW, creature.pow.toString());
-            values.put(KEY_CHA, creature.cha.toString());
+            if (creature.cha != null) {
+                values.put(KEY_CHA, creature.cha.toString());
+            }
         }
         if (creature.locations != null) {
             values.put(KEY_LOC_BASE, creature.locations.baseExpr);
@@ -175,9 +179,9 @@ public class TableRaceCreatures {
         if (creature == null) {
             creature = new RaceCreature();
         }
-        String selection = KEY_NAME + "=?";
+        String   selection     = KEY_NAME + "=?";
         String[] selectionArgs = {name};
-        Cursor cursor = mDb.query(TABLE_NAME, null, selection, selectionArgs, null, null, null, null);
+        Cursor   cursor        = mDb.query(TABLE_NAME, null, selection, selectionArgs, null, null, null, null);
         if (cursor.getCount() >= 1) {
             if (cursor.moveToFirst()) {
                 creature.name = name;
@@ -194,16 +198,16 @@ public class TableRaceCreatures {
     }
 
     void fill(Cursor cursor, RaceCreature creature) {
-        final int idxRowId = cursor.getColumnIndex(KEY_ROWID);
-        final int idxStr = cursor.getColumnIndex(KEY_STR);
-        final int idxCon = cursor.getColumnIndex(KEY_CON);
-        final int idxSiz = cursor.getColumnIndex(KEY_SIZ);
-        final int idxDex = cursor.getColumnIndex(KEY_DEX);
-        final int idxInt = cursor.getColumnIndex(KEY_INT);
-        final int idxPow = cursor.getColumnIndex(KEY_POW);
-        final int idxCha = cursor.getColumnIndex(KEY_CHA);
-        final int idxBase = cursor.getColumnIndex(KEY_LOC_BASE);
-        final int idxMove = cursor.getColumnIndex(KEY_MOVE);
+        final int idxRowId      = cursor.getColumnIndex(KEY_ROWID);
+        final int idxStr        = cursor.getColumnIndex(KEY_STR);
+        final int idxCon        = cursor.getColumnIndex(KEY_CON);
+        final int idxSiz        = cursor.getColumnIndex(KEY_SIZ);
+        final int idxDex        = cursor.getColumnIndex(KEY_DEX);
+        final int idxInt        = cursor.getColumnIndex(KEY_INT);
+        final int idxPow        = cursor.getColumnIndex(KEY_POW);
+        final int idxCha        = cursor.getColumnIndex(KEY_CHA);
+        final int idxBase       = cursor.getColumnIndex(KEY_LOC_BASE);
+        final int idxMove       = cursor.getColumnIndex(KEY_MOVE);
         final int idxStrikeRank = cursor.getColumnIndex(KEY_STRIKE_RANK);
         creature.id = cursor.getLong(idxRowId);
         creature.str = new Roll(cursor.getString(idxStr));
@@ -220,20 +224,21 @@ public class TableRaceCreatures {
         if (creature instanceof RacePlayer) {
             fill(cursor, (RacePlayer) creature);
         }
+        TableSkillRef.getInstance().query(creature);
     }
 
     void fill(Cursor cursor, RacePlayer player) {
-        final int idxHelp = cursor.getColumnIndex(KEY_HELP);
+        final int idxHelp   = cursor.getColumnIndex(KEY_HELP);
         final int idxSilver = cursor.getColumnIndex(KEY_SILVER);
         player.help = cursor.getString(idxHelp);
         player.silver = new Roll(cursor.getString(idxSilver));
     }
 
     public RaceCreature query(long id) {
-        String selection = KEY_ROWID + "=?";
-        String[] selectionArgs = {Long.toString(id)};
-        Cursor cursor = mDb.query(TABLE_NAME, null, selection, selectionArgs, null, null, null, null);
-        RaceCreature creature = null;
+        String       selection     = KEY_ROWID + "=?";
+        String[]     selectionArgs = {Long.toString(id)};
+        Cursor       cursor        = mDb.query(TABLE_NAME, null, selection, selectionArgs, null, null, null, null);
+        RaceCreature creature      = null;
         if (cursor.getCount() > 0) {
             int idxIsPlayer = cursor.getColumnIndex(KEY_IS_PLAYER);
             if (cursor.getShort(idxIsPlayer) != 0) {
@@ -251,16 +256,16 @@ public class TableRaceCreatures {
 
 
     public ArrayList<RaceCreature> query() {
-        Cursor cursor = mDb.query(TABLE_NAME, null, null, null, null, null, null, null);
-        ArrayList<RaceCreature> list = query(cursor);
+        Cursor                  cursor = mDb.query(TABLE_NAME, null, null, null, null, null, null, null);
+        ArrayList<RaceCreature> list   = query(cursor);
         cursor.close();
         return list;
     }
 
     public List<RacePlayer> queryPlayers() {
-        String selection = KEY_IS_PLAYER + "=1";
-        Cursor cursor = mDb.query(TABLE_NAME, null, selection, null, null, null, null, null);
-        ArrayList<RaceCreature> list = query(cursor);
+        String                  selection = KEY_IS_PLAYER + "=1";
+        Cursor                  cursor    = mDb.query(TABLE_NAME, null, selection, null, null, null, null, null);
+        ArrayList<RaceCreature> list      = query(cursor);
         cursor.close();
         ArrayList<RacePlayer> players = new ArrayList();
         for (RaceCreature creature : list) {
@@ -272,22 +277,22 @@ public class TableRaceCreatures {
     }
 
     public ArrayList<RaceCreature> query(Cursor cursor) {
-        ArrayList<RaceCreature> list = new ArrayList();
-        final int idxRowId = cursor.getColumnIndex(KEY_ROWID);
-        final int idxName = cursor.getColumnIndex(KEY_NAME);
-        final int idxStr = cursor.getColumnIndex(KEY_STR);
-        final int idxCon = cursor.getColumnIndex(KEY_CON);
-        final int idxSiz = cursor.getColumnIndex(KEY_SIZ);
-        final int idxDex = cursor.getColumnIndex(KEY_DEX);
-        final int idxInt = cursor.getColumnIndex(KEY_INT);
-        final int idxPow = cursor.getColumnIndex(KEY_POW);
-        final int idxCha = cursor.getColumnIndex(KEY_CHA);
-        final int idxBase = cursor.getColumnIndex(KEY_LOC_BASE);
-        int idxIsPlayer = cursor.getColumnIndex(KEY_IS_PLAYER);
-        final int idxHelp = cursor.getColumnIndex(KEY_HELP);
-        final int idxSilver = cursor.getColumnIndex(KEY_SILVER);
-        final int idxMove = cursor.getColumnIndex(KEY_MOVE);
-        final int idxStrikeRank = cursor.getColumnIndex(KEY_STRIKE_RANK);
+        ArrayList<RaceCreature> list          = new ArrayList();
+        final int               idxRowId      = cursor.getColumnIndex(KEY_ROWID);
+        final int               idxName       = cursor.getColumnIndex(KEY_NAME);
+        final int               idxStr        = cursor.getColumnIndex(KEY_STR);
+        final int               idxCon        = cursor.getColumnIndex(KEY_CON);
+        final int               idxSiz        = cursor.getColumnIndex(KEY_SIZ);
+        final int               idxDex        = cursor.getColumnIndex(KEY_DEX);
+        final int               idxInt        = cursor.getColumnIndex(KEY_INT);
+        final int               idxPow        = cursor.getColumnIndex(KEY_POW);
+        final int               idxCha        = cursor.getColumnIndex(KEY_CHA);
+        final int               idxBase       = cursor.getColumnIndex(KEY_LOC_BASE);
+        int                     idxIsPlayer   = cursor.getColumnIndex(KEY_IS_PLAYER);
+        final int               idxHelp       = cursor.getColumnIndex(KEY_HELP);
+        final int               idxSilver     = cursor.getColumnIndex(KEY_SILVER);
+        final int               idxMove       = cursor.getColumnIndex(KEY_MOVE);
+        final int               idxStrikeRank = cursor.getColumnIndex(KEY_STRIKE_RANK);
         while (cursor.moveToNext()) {
             RaceCreature creature;
             if (cursor.getShort(idxIsPlayer) != 0) {

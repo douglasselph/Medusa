@@ -57,6 +57,9 @@ public class SkillsListAdapter extends RecyclerView.Adapter<SkillsListAdapter.Cu
 
     @Override
     public int getItemCount() {
+        if (mList == null) {
+            return 0;
+        }
         return mList.size();
     }
 
